@@ -1,6 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const applicationSchema = new mongoose.Schema({
+  sr_no: {
+    type: Number,
+    unique: true,
+  },
   full_name: {
     type: String,
     // required: [true, "Name is required."],
