@@ -8,7 +8,6 @@ import AuthMiddleware from '../middlewares/verifyToken.js';
 import RolesPermissions from '../middlewares/permission.js';
 
 const router = express.Router();
-
 router.post(
   '/update-user-profile',
   AuthMiddleware,

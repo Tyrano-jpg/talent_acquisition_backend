@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 import getConfigs from './config/config.js';
 import mongo_service from './database/mongo.service.js';
 import authRouter from './routes/auth.routes.js';
-import allMasterRouter from './routes/masters/allMaster.routes.js';
+import allDevelopmentRouter from './routes/Development/allDevelopment.routes.js';
 import profileRouter from './routes/profile.routes.js';
 import rolesRouter from './routes/roles.routes.js';
 import usersRouter from './routes/users.routes.js';
@@ -62,10 +62,11 @@ app.use(`/api/${Configs.server.version}/auth`, authRouter);
 app.use(`/api/${Configs.server.version}/user`, usersRouter);
 app.use(`/api/${Configs.server.version}/role`, rolesRouter);
 app.use(`/api/${Configs.server.version}/profile`, profileRouter);
-app.use('/server-health', checkServerHealth);
+// app.use('/server-health', checkServerHealth);
 //master
-app.use(`/api/${Configs.server.version}`, allMasterRouter);
+app.use(`/api/${Configs.server.version}/development`, allDevelopmentRouter);
 
+//website
 
 app.use(globalErrorHandler);
 
