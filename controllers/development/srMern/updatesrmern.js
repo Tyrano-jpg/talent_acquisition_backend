@@ -2,7 +2,7 @@ import applicationModel from "../../../database/schema/masters/CandidateApplicat
 
 import catchAsync from '../../../utils/errors/catchAsync.js';
 
-
+//test
 export const updating_srmern = catchAsync(async (req, res, next) => {
     const { id } = req.params; 
   const { stage } = req.body; 
