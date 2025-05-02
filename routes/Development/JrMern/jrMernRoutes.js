@@ -4,19 +4,19 @@ import { Router } from 'express';
 // import { listing_new_srmern } from "../../../controllers/development/srMern/new.controller";
 import AuthMiddleware from '../../../middlewares/verifyToken.js';
 import RolesPermissions from '../../../middlewares/permission.js';
-import { listing_new_srmern } from '../../../controllers/development/srMern/new.controller.js';
-import { updating_srmern } from '../../../controllers/development/srMern/updatesrmern.js';
+import { listing_new_jrmern } from '../../../controllers/development/jrMern/jrmern.controller.js';
+import { updating_jrmern } from '../../../controllers/development/jrMern/updatingjrmern.js';
 
-const srMernRouter = Router();
+const jrMernRouter = Router();
 console.log('oiwer9wer');
 
-srMernRouter.post(
+jrMernRouter.post(
   '/list',
   AuthMiddleware,
   // RolesPermissions('user', 'add'),
-  listing_new_srmern
+   listing_new_jrmern
 );
 
-srMernRouter.post('/update', AuthMiddleware, updating_srmern);
+jrMernRouter.post('/update', AuthMiddleware, updating_jrmern);
 
-export default srMernRouter;
+export default jrMernRouter;
