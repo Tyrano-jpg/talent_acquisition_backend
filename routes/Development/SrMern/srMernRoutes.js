@@ -5,6 +5,7 @@ import { Router } from "express";
 import AuthMiddleware from "../../../middlewares/verifyToken.js";
 import RolesPermissions from "../../../middlewares/permission.js";
 import { listing_new_srmern } from "../../../controllers/development/srMern/new.controller.js";
+import { updating_srmern } from "../../../controllers/development/srMern/updatesrmern.js";
 
 const srMernRouter = Router();
 console.log("oiwer9wer")
@@ -14,5 +15,7 @@ srMernRouter.post("/list",
     // RolesPermissions('user', 'add'),
     listing_new_srmern
 );
+
+srMernRouter.post('/update', AuthMiddleware, updating_srmern)
 
 export default srMernRouter;

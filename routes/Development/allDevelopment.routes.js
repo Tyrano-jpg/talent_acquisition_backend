@@ -1,5 +1,5 @@
 import express from 'express';
-import srMernRouter from './SrMern/newLisitingRoutes.js';
+import srMernRouter from './SrMern/srMernRoutes.js';
 const allDevelopmentRouter = express.Router();
 
 console.log("jsfjsbfjs")
