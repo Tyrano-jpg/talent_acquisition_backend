@@ -2,7 +2,7 @@ import applicationModel from "../../../database/schema/masters/CandidateApplicat
 import catchAsync from '../../../utils/errors/catchAsync.js';
 
 //test
-export const updating_srsofteng = catchAsync(async (req, res, next) => {
+export const updating_jrflutter = catchAsync(async (req, res, next) => {
   const { _id } = req.params;  
   const { stage } = req.body;
 

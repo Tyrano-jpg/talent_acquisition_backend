@@ -67,7 +67,7 @@ app.use(`/api/${Configs.server.version}/profile`, profileRouter);
 app.use(`/api/${Configs.server.version}/development`, allDevelopmentRouter);
 
 //website
-// app.use(`/api/${Configs.server.version}/website`)
+// app.use(`/api/${Configs.server.version}/website`, allWebsiteRouter)
 
 app.use(globalErrorHandler);
 
