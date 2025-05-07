@@ -7,6 +7,6 @@ console.log("jsfjsbfjs")
 
 allDevelopmentRouter.use('/sr-mern', srMernRouter)
 allDevelopmentRouter.use('/jr-mern', jrMernRouter)
-// allDevelopmentRouter.use('/srsofteng, ')
+
 
 export default allDevelopmentRouter;

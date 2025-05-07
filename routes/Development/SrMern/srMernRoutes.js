@@ -17,6 +17,6 @@ srMernRouter.post(
   listing_new_srmern
 );
 
-srMernRouter.post('/update', AuthMiddleware, updating_srmern);
+srMernRouter.post('/update/:_id', AuthMiddleware, updating_srmern);
 
 export default srMernRouter;
