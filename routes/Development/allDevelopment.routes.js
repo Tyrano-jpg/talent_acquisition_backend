@@ -6,6 +6,7 @@ import jrSoftEngRouter from './jrSoftEng/jrSoftEngRoutes.js';
 import phpRouter from './Php/phpRoutes.js';
 import jrflutterRouter from './jrFlutter/jrFlutterRoutes.js';
 import srflutterRouter from './srFlutter/srFlutterRoutes.js';
+import androidRouter from './Android/androidRoutes.js';
 
 const allDevelopmentRouter = express.Router();
 
@@ -18,6 +19,7 @@ allDevelopmentRouter.use('/jr-soft-eng', jrSoftEngRouter)
 allDevelopmentRouter.use('php', phpRouter)
 allDevelopmentRouter.use('/jr-flutter', jrflutterRouter)
 allDevelopmentRouter.use('/sr-flutter', srflutterRouter)
+allDevelopmentRouter.use('android', androidRouter)
 
 
 export default allDevelopmentRouter;
