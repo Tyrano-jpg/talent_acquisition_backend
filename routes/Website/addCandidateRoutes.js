@@ -1,14 +1,15 @@
 import { Router } from 'express';
-import AuthMiddleware from '../../../middlewares/verifyToken.js';
+import { AddJobApplication } from '../../controllers/website/career/addcandidate.controller.js';
+import { MulterFunction } from '../../config/multer/multer.js';
 
 const careerRouter = Router();
 console.log('oiwer9wer');
 
 careerRouter.post(
   '/add-candidate',
-  AuthMiddleware,
+  MulterFunction,
   // RolesPermissions('user', 'add'),
-  
+  AddJobApplication  
 );
 
 
