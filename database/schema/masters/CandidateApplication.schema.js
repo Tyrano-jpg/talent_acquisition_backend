@@ -82,6 +82,19 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+    core_invoice_details: {
+    approval_status: {
+      sendForApproval: {
+        status: { type: Boolean, default: false },
+      },
+      approved: {
+        status: { type: Boolean, default: false },
+      },
+      rejected: {
+        status: { type: Boolean, default: false },
+      },
+    },
+  },
 });
 
 const applicationModel = mongoose.model("application", applicationSchema);
