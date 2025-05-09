@@ -85,7 +85,7 @@ const applicationSchema = new mongoose.Schema({
     core_invoice_details: {
     approval_status: {
       sendForApproval: {
-        status: { type: Boolean, default: false },
+        status: { type: Boolean, default: true },
       },
       approved: {
         status: { type: Boolean, default: false },
