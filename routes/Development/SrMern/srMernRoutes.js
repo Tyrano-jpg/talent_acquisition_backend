@@ -7,6 +7,7 @@ import RolesPermissions from '../../../middlewares/permission.js';
 import { listing_new_srmern } from '../../../controllers/development/srMern/new.controller.js';
 import { updating_srmern } from '../../../controllers/development/srMern/updatesrmern.js';
 import { srmern_bulkUpload } from '../../../controllers/development/srMern/bulkupload.controller.js';
+import { uploadCandidateData } from '../../../controllers/development/srMern/uploadCandidate.controller.js';
 
 const srMernRouter = Router();
 console.log('oiwer9wer');
@@ -20,6 +21,8 @@ srMernRouter.post(
 
 srMernRouter.post('/update/:_id', AuthMiddleware, updating_srmern);
 
-srMernRouter.post('/bulk-upload', AuthMiddleware, srmern_bulkUpload)
+srMernRouter.post('/bulk-upload', AuthMiddleware, srmern_bulkUpload);
+
+srMernRouter.post('/upload-candidate', AuthMiddleware, uploadCandidateData)
 
 export default srMernRouter;
