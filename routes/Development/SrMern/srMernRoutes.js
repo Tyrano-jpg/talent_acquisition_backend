@@ -25,7 +25,9 @@ srMernRouter.post('/update/:_id', AuthMiddleware, updating_srmern);
 
 srMernRouter.post('/bulk-upload', AuthMiddleware, srmern_bulkUpload);
 
-srMernRouter.post('/upload-candidate', MulterFunction, uploadCandidateData)
+srMernRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+  { name: 'resume_file' },
+]), uploadCandidateData)
 
 srMernRouter.post('/update-status', AuthMiddleware, updateStatus)
 
