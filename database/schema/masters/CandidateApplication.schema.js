@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const applicationSchema = new mongoose.Schema({
   sr_no: {
     type: Number,
-    unique: true,
+    // unique: true,
   },
   full_name: {
     type: String,
@@ -49,7 +49,6 @@ const applicationSchema = new mongoose.Schema({
   },
   resume_file: {
     type: Schema.Types.Mixed,
-    required: true,
   },
   portfolio_link: {
     type: String,
