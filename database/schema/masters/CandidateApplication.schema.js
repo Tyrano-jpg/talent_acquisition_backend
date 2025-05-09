@@ -12,7 +12,7 @@ const applicationSchema = new mongoose.Schema({
   },
   email_id: {
     type: String,
-    required: [true, "Email is required."],
+    // required: [true, "Email is required."],
     trim: true,
     // unique: true,
   },
@@ -80,7 +80,7 @@ const applicationSchema = new mongoose.Schema({
   },
   stack: {
     type: String,
-    required: true,
+    // required: true,
   },
     core_invoice_details: {
     approval_status: {
