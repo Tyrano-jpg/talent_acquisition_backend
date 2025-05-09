@@ -9,6 +9,7 @@ import { updating_srmern } from '../../../controllers/development/srMern/updates
 import { srmern_bulkUpload } from '../../../controllers/development/srMern/bulkupload.controller.js';
 import { uploadCandidateData } from '../../../controllers/development/srMern/uploadCandidate.controller.js';
 import { updateStatus } from '../../../controllers/development/srMern/updateStatus.controller.js';
+import { MulterFunction } from '../../../config/multer/multer.js';
 
 const srMernRouter = Router();
 console.log('oiwer9wer');
@@ -24,7 +25,7 @@ srMernRouter.post('/update/:_id', AuthMiddleware, updating_srmern);
 
 srMernRouter.post('/bulk-upload', AuthMiddleware, srmern_bulkUpload);
 
-srMernRouter.post('/upload-candidate', AuthMiddleware, uploadCandidateData)
+srMernRouter.post('/upload-candidate', MulterFunction, uploadCandidateData)
 
 srMernRouter.post('/update-status', AuthMiddleware, updateStatus)
 
