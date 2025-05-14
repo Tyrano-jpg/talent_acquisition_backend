@@ -52,7 +52,7 @@ export const listing_new_jrmern = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "jr_mern"
   };
 
   const aggregate_stage = [
