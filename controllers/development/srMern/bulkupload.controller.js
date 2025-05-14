@@ -14,26 +14,28 @@ export const srmern_bulkUpload = async (req, res) => {
       return res.status(400).json({ message: "No data provided or data is not in array format." });
     }
 
-    // Validate each entry
-    const requiredFields = ["email_id", "stack",];
+    // Required fields
+    const requiredFields = ["email_id", "stack"];
     const missingFields = [];
     const duplicateEntries = [];
-    
-    // Get all existing sr_no for quick lookup
-    const existingSrNos = await applicationModel.find({}, { sr_no: 1 }).lean();
-    const existingSrNoSet = new Set(existingSrNos.map((app) => app.sr_no));
 
-    // Prepare for bulk insert
-    const applications = data.map((item) => {
-      // Check for required fields
+    // **Step 1:** Collect all email IDs first
+    const emailList = data.map((item) => item.email_id);
+
+    // **Step 2:** Loop through and validate
+    const applications = data.map((item, index) => {
       const missing = requiredFields.filter((field) => !item[field]);
+
       if (missing.length > 0) {
-        missingFields.push({ sr_no: item.sr_no, missing });
+        missingFields.push({ index, missing });
       }
 
-      // Check for duplicate `sr_no`
-      if (existingSrNoSet.has(item.sr_no)) {
-        duplicateEntries.push(item.sr_no);
+      // **Step 3:** Duplicate check within the array itself
+      if (item.email_id) {
+        const isDuplicate = emailList.filter((email) => email === item.email_id).length > 1;
+        if (isDuplicate) {
+          duplicateEntries.push({ index, email_id: item.email_id });
+        }
       }
 
       return {
