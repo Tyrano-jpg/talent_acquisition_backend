@@ -14,7 +14,7 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     // required: [true, "Email is required."],
     trim: true,
-    // unique: true,
+    unique: true,
   },
   contact_no: {
     type: Number,
