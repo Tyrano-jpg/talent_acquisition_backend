@@ -22,14 +22,33 @@ const applicationSchema = new mongoose.Schema({
     trim: true,
     // unique: true,
   },
-
-  relevant_experience: {
+  current_location: {
     type: String,
     trim: true,
   },
-  current_org: {
+  current_company: {
     type: String,
-    trim: true
+    trim: true,
+  },
+  role: {
+    type: String,
+    trim: true,
+  },
+  industry: {
+    type: String,
+    trim: true,
+  },
+  key_skill: {
+    type: [String],
+    trim: true,
+  },
+  notice_period: {
+    type: String,
+    trim: true,
+  },
+  relevant_experience: {
+    type: String,
+    trim: true,
   },
   current_ctc: {
     type: Number,
