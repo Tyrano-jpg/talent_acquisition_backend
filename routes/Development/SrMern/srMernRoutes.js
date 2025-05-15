@@ -7,7 +7,7 @@ import RolesPermissions from '../../../middlewares/permission.js';
 import { listing_new_srmern } from '../../../controllers/development/srMern/new.controller.js';
 import { updating_srmern } from '../../../controllers/development/srMern/updatesrmern.js';
 import { srmern_bulkUpload } from '../../../controllers/development/srMern/bulkupload.controller.js';
-import { uploadCandidateData } from '../../../controllers/development/srMern/uploadCandidate.controller.js';
+import { uploadCandidateDataSrMern } from '../../../controllers/development/srMern/uploadCandidate.controller.js';
 import { updateStatus } from '../../../controllers/development/srMern/updateStatus.controller.js';
 import { MulterFunction } from '../../../config/multer/multer.js';
 
@@ -27,7 +27,7 @@ srMernRouter.post('/bulk-upload', AuthMiddleware, srmern_bulkUpload);
 
 srMernRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
-]), uploadCandidateData)
+]), uploadCandidateDataSrMern)
 
 // srMernRouter.post('/update-status', AuthMiddleware, updateStatus)
 

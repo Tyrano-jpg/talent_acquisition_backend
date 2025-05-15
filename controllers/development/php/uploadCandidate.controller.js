@@ -1,7 +1,7 @@
 import applicationModel from "../../../database/schema/masters/CandidateApplication.schema.js";
 import catchAsync from "../../../utils/errors/catchAsync.js";
 
-export const uploadCandidateDataSrMern = catchAsync(async (req, res) => {
+export const uploadCandidateDataPhp = catchAsync(async (req, res) => {
     var data = { ...req.body };
   
     const resumeFile = req.files?.resume_file;
