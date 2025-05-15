@@ -29,6 +29,6 @@ srMernRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).field
   { name: 'resume_file' },
 ]), uploadCandidateData)
 
-srMernRouter.post('/update-status', AuthMiddleware, updateStatus)
+// srMernRouter.post('/update-status', AuthMiddleware, updateStatus)
 
 export default srMernRouter;
