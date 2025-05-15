@@ -1,7 +1,7 @@
 // import { Queue, QueueEvents, Worker } from 'bullmq';
 // import { connection } from '../../config/redis/redis.config.js';
 // import dressing_raw_machine_data_model from '../../database/schema/factory/dressing/dressing_done/dressing.machine.raw.data.schema.js';
-// import ApiError from '../errors/apiError.js';
+// import ApiError from '../errors/ApiError.js';
 // import { StatusCodes } from '../constants.js';
 // import { get_session } from '../mongo_session_store.js';
 

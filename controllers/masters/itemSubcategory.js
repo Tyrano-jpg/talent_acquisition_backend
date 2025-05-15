@@ -1,4 +1,4 @@
-import ApiError from '../../utils/errors/apiError.js';
+import ApiError from '../../utils/errors/ApiError.js';
 import catchAsync from '../../utils/errors/catchAsync.js';
 import ApiResponse from '../../utils/ApiResponse.js';
 import { StatusCodes } from '../../utils/constants.js';

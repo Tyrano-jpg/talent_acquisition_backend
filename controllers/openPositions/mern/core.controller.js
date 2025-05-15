@@ -5,7 +5,7 @@ import {
   core_inventory_items_view_modal,
 } from '../../../database/schema/inventory/core/core.schema.js';
 import catchAsync from '../../../utils/errors/catchAsync.js';
-import ApiError from '../../../utils/errors/apiError.js';
+import ApiError from '../../../utils/errors/ApiError.js';
 import ApiResponse from '../../../utils/ApiResponse.js';
 import { StatusCodes } from '../../../utils/constants.js';
 import { DynamicSearch } from '../../../utils/dynamicSearch/dynamic.js';

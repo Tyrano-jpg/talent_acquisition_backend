@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import characterModel from '../../../database/schema/masters/character.schema.js';
 import ApiResponse from '../../../utils/ApiResponse.js';
-import ApiError from '../../../utils/errors/apiError.js';
+import ApiError from '../../../utils/errors/ApiError.js';
 import catchAsync from '../../../utils/errors/catchAsync.js';
 import { DynamicSearch } from '../../../utils/dynamicSearch/dynamic.js';
 import { dynamic_filter } from '../../../utils/dymanicFilter.js';

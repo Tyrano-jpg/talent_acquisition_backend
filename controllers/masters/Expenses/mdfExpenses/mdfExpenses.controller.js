@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { dynamic_filter } from '../../../../utils/dymanicFilter.js';
 import { DynamicSearch } from '../../../../utils/dynamicSearch/dynamic.js';
 import catchAsync from '../../../../utils/errors/catchAsync.js';
-import ApiError from '../../../../utils/errors/apiError.js';
+import ApiError from '../../../../utils/errors/ApiError.js';
 import ApiResponse from '../../../../utils/ApiResponse.js';
 import { StatusCodes } from '../../../../utils/constants.js';
 import {

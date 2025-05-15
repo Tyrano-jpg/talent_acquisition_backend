@@ -4,7 +4,7 @@ import catchAsync from '../../utils/errors/catchAsync.js';
 import { DynamicSearch } from '../../utils/dynamicSearch/dynamic.js';
 
 import XLSX from 'xlsx';
-import ApiError from '../../utils/errors/apiError.js';
+import ApiError from '../../utils/errors/ApiError.js';
 import ApiResponse from '../../utils/ApiResponse.js';
 import { StatusCodes } from '../../utils/constants.js';
 

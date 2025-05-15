@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import catchAsync from '../../../../utils/errors/catchAsync.js';
-import ApiError from '../../../../utils/errors/apiError.js';
+import ApiError from '../../../../utils/errors/ApiError.js';
 import {
   customer_client_model,
   customer_model,

@@ -4,7 +4,7 @@ import {
   customer_model,
 } from '../../../database/schema/masters/customer.schema.js';
 import catchAsync from '../../../utils/errors/catchAsync.js';
-import ApiError from '../../../utils/errors/apiError.js';
+import ApiError from '../../../utils/errors/ApiError.js';
 import ApiResponse from '../../../utils/ApiResponse.js';
 import { dynamic_filter } from '../../../utils/dymanicFilter.js';
 import { DynamicSearch } from '../../../utils/dynamicSearch/dynamic.js';

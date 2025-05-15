@@ -1,4 +1,4 @@
-import ApiError from './apiError.js';
+import ApiError from './ApiError.js';
 import fs from 'fs';
 
 const catchAsync = (fn) => {

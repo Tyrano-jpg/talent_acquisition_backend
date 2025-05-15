@@ -6,7 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { FetchUserByUserName } from '../utils/fetchDetails/fetchDetailsByUserName.js';
 import UserModel from '../database/schema/user.schema.js';
-import ApiError from '../utils/errors/apiError.js';
+import ApiError from '../utils/errors/ApiError.js';
 
 // Get the directory name of the current module file
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

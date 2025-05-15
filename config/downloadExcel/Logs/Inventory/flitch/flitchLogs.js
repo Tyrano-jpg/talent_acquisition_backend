@@ -1,6 +1,6 @@
 import exceljs from 'exceljs';
 import fs from 'fs/promises';
-import ApiError from '../../../../../utils/errors/apiError.js';
+import ApiError from '../../../../../utils/errors/ApiError.js';
 import dotenv from 'dotenv/config';
 export const createFlitchLogsExcel = async (newData) => {
   try {

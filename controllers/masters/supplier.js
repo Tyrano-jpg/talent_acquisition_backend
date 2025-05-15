@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import SupplierModel from '../../database/schema/masters/supplier.schema.js';
 import catchAsync from '../../utils/errors/catchAsync.js';
 import { DynamicSearch } from '../../utils/dynamicSearch/dynamic.js';
-import ApiError from '../../utils/errors/apiError.js';
+import ApiError from '../../utils/errors/ApiError.js';
 import { StatusCodes } from '../../utils/constants.js';
 import ApiResponse from '../../utils/ApiResponse.js';
 import supplierBranchModel from '../../database/schema/masters/supplier.branches.schema.js';
