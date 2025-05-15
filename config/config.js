@@ -10,8 +10,8 @@ const getConfigs = () => {
       origin: [
         'http://localhost:3001',
         'http://localhost:3000',
-        'https://topl.kdcstaging.in',
-        'https://kdctopl.kdcstaging.in',
+        // 'https://topl.kdcstaging.in',
+        // 'https://kdctopl.kdcstaging.in',
       ],
       credentials: true,
     },
