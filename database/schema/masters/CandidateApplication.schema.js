@@ -26,7 +26,7 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  current_company: {
+  current_org: {
     type: String,
     trim: true,
   },
