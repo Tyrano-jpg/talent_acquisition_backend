@@ -52,7 +52,7 @@ export const listing_new_srflutter = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "sr_flutter"
   };
 
   const aggregate_stage = [

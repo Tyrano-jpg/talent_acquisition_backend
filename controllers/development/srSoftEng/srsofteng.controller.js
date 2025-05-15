@@ -52,7 +52,7 @@ export const listing_new_srsofteng = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "sr_soft_eng"
   };
 
   const aggregate_stage = [

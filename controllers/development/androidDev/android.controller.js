@@ -52,7 +52,7 @@ export const listing_new_android = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "android"
   };
 
   const aggregate_stage = [

@@ -52,7 +52,7 @@ export const listing_newleadarchitect = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "lead_architect"
   };
 
   const aggregate_stage = [

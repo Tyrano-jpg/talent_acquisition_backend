@@ -52,7 +52,7 @@ export const listing_newios = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "ios"
   };
 
   const aggregate_stage = [

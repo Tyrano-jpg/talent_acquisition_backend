@@ -52,7 +52,7 @@ export const listing_new_jrflutter = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "jr_flutter"
   };
 
   const aggregate_stage = [

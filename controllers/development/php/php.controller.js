@@ -52,7 +52,7 @@ export const listing_new_php = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "php"
   };
 
   const aggregate_stage = [
