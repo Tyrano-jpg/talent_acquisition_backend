@@ -56,6 +56,7 @@ const applicationSchema = new mongoose.Schema({
   },
   applied_date: {
     type: Date,
+    default: Date.now,
     trim: true
   },
   stage: {
