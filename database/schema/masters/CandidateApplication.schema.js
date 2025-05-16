@@ -100,7 +100,7 @@ const applicationSchema = new mongoose.Schema({
   },
   stack: {
     type: String,
-    // required: true,
+    required: true,
   },
     core_invoice_details: {
     approval_status: {
