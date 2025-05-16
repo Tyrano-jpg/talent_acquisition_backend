@@ -52,7 +52,7 @@ export const listing_newaidev = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "sr_mern"
+    stack: "ai_dev"
   };
 
   const aggregate_stage = [
