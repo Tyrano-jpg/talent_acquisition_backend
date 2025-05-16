@@ -9,6 +9,7 @@ import srFlutterRouter from './SrFlutterDev/srFlutterRoutes.js';
 import androidRouter from './AndroidDev/androidRoutes.js';
 import iosRouter from './IOSDev/iosRoutes.js';
 import leadArchitectRouter from './LeadArchitect/leadArchitectRoutes.js';
+import aiDevRouter from './AiDev/aiDevRoutes.js';
 
 const allDevelopmentRouter = express.Router();
 
@@ -25,6 +26,7 @@ allDevelopmentRouter.use('/sr-flutter', srFlutterRouter)
 allDevelopmentRouter.use('/android', androidRouter)
 allDevelopmentRouter.use('/ios', iosRouter)
 allDevelopmentRouter.use('/lead-architect', leadArchitectRouter)
+allDevelopmentRouter.use('/ai-dev', aiDevRouter)
 
 
 export default allDevelopmentRouter;
