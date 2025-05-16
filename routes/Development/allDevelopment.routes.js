@@ -13,8 +13,6 @@ import aiDevRouter from './AiDev/aiDevRoutes.js';
 
 const allDevelopmentRouter = express.Router();
 
-console.log("jsfjsbfjs")
-
 allDevelopmentRouter.use('/sr-mern', srMernRouter)
 allDevelopmentRouter.use('/jr-mern', jrMernRouter)
 allDevelopmentRouter.use('/jr-soft-eng', jrSoftEngRouter)
