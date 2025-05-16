@@ -6,6 +6,7 @@ import { listing_new_srsofteng } from '../../../controllers/development/srSoftEn
 import { updating_srsofteng } from '../../../controllers/development/srSoftEng/updatesrsofteng.js';
 import { srsofteng_bulkUpload } from '../../../controllers/development/srSoftEng/bulkupload.controller.js';
 import { uploadCandidateDataSrSoftEng } from '../../../controllers/development/srSoftEng/uploadCandidate.controller.js';
+import { edit_jrsofteng } from '../../../controllers/development/jrSoftEng/edit.controller.js';
 
 const srSoftEngRouter = Router();
 console.log('oiwer9wer');
@@ -18,6 +19,8 @@ srSoftEngRouter.post(
 );
 
 srSoftEngRouter.post('/update/:_id', AuthMiddleware, updating_srsofteng);
+
+srSoftEngRouter.post('/edit/:id', AuthMiddleware, edit_jrsofteng)
 
 srSoftEngRouter.post('/bulk-upload', AuthMiddleware, srsofteng_bulkUpload);
 

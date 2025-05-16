@@ -6,6 +6,7 @@ import { updating_jrmern } from '../../../controllers/development/jrMern/updatin
 import { jrmern_bulkUpload } from '../../../controllers/development/jrMern/bulkupload.controller.js';
 import { uploadCandidateData } from '../../../controllers/development/jrMern/uploadCandidate.controller.js';
 import { listing_new_jrmern } from '../../../controllers/development/jrMern/jrmern.controller.js';
+import { edit_jrmern } from '../../../controllers/development/jrMern/edit.controller.js';
 
 const jrMernRouter = Router();
 console.log('oiwer9wer');
@@ -18,6 +19,8 @@ jrMernRouter.post(
 );
 
 jrMernRouter.post('/update/:_id', AuthMiddleware, updating_jrmern);
+
+jrMernRouter.post('/edit/:_id', AuthMiddleware, edit_jrmern);
 
 jrMernRouter.post('/bulk-upload', AuthMiddleware, jrmern_bulkUpload);
 

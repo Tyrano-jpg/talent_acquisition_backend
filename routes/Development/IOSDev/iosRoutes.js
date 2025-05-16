@@ -6,6 +6,7 @@ import { listing_newios } from '../../../controllers/development/iosDev/ios.cont
 import { updating_ios } from '../../../controllers/development/iosDev/updateios.js';
 import { ios_bulkUpload } from '../../../controllers/development/iosDev/bulkupload.controller.js';
 import { uploadCandidateDataIOS } from '../../../controllers/development/iosDev/uploadCandidate.Controller.js';
+import { edit_ios } from '../../../controllers/development/iosDev/edit.controller.js';
 const iosRouter = Router();
 console.log('oiwer9wer');
 
@@ -17,6 +18,8 @@ iosRouter.post(
 );
 
 iosRouter.post('/update/:_id', AuthMiddleware, updating_ios);
+
+iosRouter.post('/edit/:_id', AuthMiddleware, edit_ios);
 
 iosRouter.post('/bulk-upload', AuthMiddleware, ios_bulkUpload);
 

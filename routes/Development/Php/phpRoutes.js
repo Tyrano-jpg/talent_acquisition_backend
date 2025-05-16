@@ -6,6 +6,7 @@ import { listing_new_php } from '../../../controllers/development/php/php.contro
 import { updating_php } from '../../../controllers/development/php/updatephp.js';
 import { php_bulkUpload } from '../../../controllers/development/php/bulkupload.controller.js';
 import { uploadCandidateDataPhp } from '../../../controllers/development/php/uploadCandidate.controller.js';
+import { edit_php } from '../../../controllers/development/php/edit.controller.js';
 
 const phpRouter = Router();
 console.log('oiwer9wer');
@@ -18,6 +19,8 @@ phpRouter.post(
 );
 
 phpRouter.post('/update/:_id', AuthMiddleware, updating_php);
+
+phpRouter.post('/edit/:_id', AuthMiddleware, edit_php);
 
 phpRouter.post('/bulk-upload', AuthMiddleware, php_bulkUpload);
 

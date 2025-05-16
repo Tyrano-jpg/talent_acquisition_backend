@@ -6,6 +6,7 @@ import { updating_srflutter } from '../../../controllers/development/srFlutterDe
 import { srflutter_bulkUpload } from '../../../controllers/development/srFlutterDev/bulkupload.controller.js';
 import { uploadCandidateDataSrFLutter } from '../../../controllers/development/srFlutterDev/uploadCandidate.controller.js';
 import { listing_new_srflutter } from '../../../controllers/development/srFlutterDev/srflutter.controller.js';
+import { editsrflutter } from '../../../controllers/development/srFlutterDev/edit.controller.js';
 
 const srFlutterRouter = Router();
 console.log('oiwer9wer');
@@ -18,6 +19,8 @@ srFlutterRouter.post(
 );
 
 srFlutterRouter.post('/update/:_id', AuthMiddleware, updating_srflutter);
+
+srFlutterRouter.post('/edit/:_id', AuthMiddleware, editsrflutter);
 
 srFlutterRouter.post('/bulk-upload', AuthMiddleware, srflutter_bulkUpload);
 

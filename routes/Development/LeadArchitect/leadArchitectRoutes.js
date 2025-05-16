@@ -6,6 +6,7 @@ import { updating_leadarchitect } from '../../../controllers/development/leadArc
 import { leadarchitect_bulkUpload } from '../../../controllers/development/leadArchitect/bulkupload.controller.js';
 import { uploadCandidateDataLeadArchitect } from '../../../controllers/development/leadArchitect/uploadCandidate.Controller.js';
 import { listing_newleadarchitect } from '../../../controllers/development/leadArchitect/leadarchitect.controller.js';
+import { edit_leadarchitect } from '../../../controllers/development/leadArchitect/edit.controller.js';
 const leadArchitectRouter = Router();
 console.log('oiwer9wer');
 
@@ -17,6 +18,8 @@ leadArchitectRouter.post(
 );
 
 leadArchitectRouter.post('/update/:_id', AuthMiddleware, updating_leadarchitect);
+
+leadArchitectRouter.post('/edit/:_id', AuthMiddleware, edit_leadarchitect);
 
 leadArchitectRouter.post('/bulk-upload', AuthMiddleware, leadarchitect_bulkUpload);
 

@@ -6,6 +6,7 @@ import { listing_new_android } from '../../../controllers/development/androidDev
 import { updating_android } from '../../../controllers/development/androidDev/updateandroid.js';
 import { android_bulkUpload } from '../../../controllers/development/androidDev/bulkupload.controller.js';
 import { uploadCandidateDataAndroid } from '../../../controllers/development/androidDev/uploadCandidate.controller.js';
+import { edit_android } from '../../../controllers/development/androidDev/edit.controller.js';
 const androidRouter = Router();
 console.log('oiwer9wer');
 
@@ -17,6 +18,8 @@ androidRouter.post(
 );
 
 androidRouter.post('/update/:_id', AuthMiddleware, updating_android);
+
+androidRouter.post('/edit/:_id', AuthMiddleware, edit_android);
 
 androidRouter.post('/bulk-upload', AuthMiddleware, android_bulkUpload);
 

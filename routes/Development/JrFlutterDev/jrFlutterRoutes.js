@@ -6,6 +6,7 @@ import { uploadCandidateDataJrFlutter } from '../../../controllers/development/j
 import { updating_jrflutter } from '../../../controllers/development/jrFlutterDev/updatejrflutter.js';
 import { jrflutter_bulkUpload } from '../../../controllers/development/jrFlutterDev/bulkupload.controller.js';
 import { listing_new_jrflutter } from '../../../controllers/development/jrFlutterDev/jrflutter.controller.js';
+import { edit_jrflutter } from '../../../controllers/development/jrFlutterDev/edit.controller.js';
 
 const jrFlutterRouter = Router();
 console.log('oiwer9wer');
@@ -18,6 +19,8 @@ jrFlutterRouter.post(
 );
 
 jrFlutterRouter.post('/update/:_id', AuthMiddleware, updating_jrflutter);
+
+jrFlutterRouter.post('/edit/:_id', AuthMiddleware, edit_jrflutter);
 
 jrFlutterRouter.post('/bulk-upload', AuthMiddleware, jrflutter_bulkUpload);
 
