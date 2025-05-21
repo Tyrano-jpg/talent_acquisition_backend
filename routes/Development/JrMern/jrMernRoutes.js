@@ -7,6 +7,7 @@ import { jrmern_bulkUpload } from '../../../controllers/development/jrMern/bulku
 import { uploadCandidateData } from '../../../controllers/development/jrMern/uploadCandidate.controller.js';
 import { listing_new_jrmern } from '../../../controllers/development/jrMern/jrmern.controller.js';
 import { edit_jrmern } from '../../../controllers/development/jrMern/edit.controller.js';
+import { downloadCSVFormat } from '../../../controllers/development/jrMern/generatecsv.js';
 
 const jrMernRouter = Router();
 
@@ -26,6 +27,8 @@ jrMernRouter.post('/bulk-upload', AuthMiddleware, jrmern_bulkUpload);
 jrMernRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateData)
+
+jrMernRouter.get('/download-csv', AuthMiddleware, downloadCSVFormat)
 
 // jrMernRouter.post('/update-status', AuthMiddleware, updateStatus)
 

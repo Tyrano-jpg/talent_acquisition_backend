@@ -7,6 +7,7 @@ import { updating_jrsofteng } from '../../../controllers/development/jrSoftEng/u
 import { jrsofteng_bulkUpload } from '../../../controllers/development/jrSoftEng/bulkupload.controller.js';
 import { uploadCandidateDataJrSoftEng } from '../../../controllers/development/jrSoftEng/uploadCandidate.controller.js';
 import { edit_jrsofteng } from '../../../controllers/development/jrSoftEng/edit.controller.js';
+import { downloadCSVFormat } from '../../../controllers/development/jrSoftEng/genratecsv.js';
 
 const jrSoftEngRouter = Router();
 
@@ -26,6 +27,8 @@ jrSoftEngRouter.post('/bulk-upload', AuthMiddleware, jrsofteng_bulkUpload);
 jrSoftEngRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataJrSoftEng)
+
+jrSoftEngRouter.get('/download-csv', AuthMiddleware, downloadCSVFormat)
 
 // jrSoftEngRouter.post('/update-status', AuthMiddleware, updateStatus)
 

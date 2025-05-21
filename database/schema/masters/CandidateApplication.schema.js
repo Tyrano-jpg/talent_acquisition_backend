@@ -1,26 +1,18 @@
 import mongoose, { Schema } from "mongoose";
 
 const applicationSchema = new mongoose.Schema({
-  // sr_no: {
-  //   type: Number,
-  //   // unique: true,
-  // },
   full_name: {
     type: String,
-    // required: [true, "Name is required."],
     trim: true,
   },
   email_id: {
     type: String,
-    // required: [true, "Email is required."],
     trim: true,
     unique: true,
   },
   contact_no: {
     type: Number,
-    // required: [true, "Phone Number is required."],
     trim: true,
-    // unique: true,
   },
   current_location: {
     type: String,
