@@ -32,6 +32,6 @@ srMernRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).field
   { name: 'resume_file' },
 ]), uploadCandidateDataSrMern)
 
-srMernRouter.post('/download-csv', AuthMiddleware, downloadCSVFormat)
+srMernRouter.get('/download-csv', AuthMiddleware, downloadCSVFormat)
 
 export default srMernRouter;
