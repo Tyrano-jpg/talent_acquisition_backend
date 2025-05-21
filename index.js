@@ -67,8 +67,9 @@ app.use(`/api/${Configs.server.version}/profile`, profileRouter);
 // app.use('/server-health', checkServerHealth);
 //development
 app.use(`/api/${Configs.server.version}/development`, allDevelopmentRouter);
+
 //other
-app.use(`/api/${Configs.server.version}/development`, allOtherRouter)
+app.use(`/api/${Configs.server.version}/other`, allOtherRouter)
 
 //website
 app.use(`/api/${Configs.server.version}/website`, allWebsiteRouter)

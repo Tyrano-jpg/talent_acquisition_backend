@@ -5,6 +5,7 @@ import { updating_hr } from '../../../controllers/other/hr/updatehr.js';
 import { edit_hr } from '../../../controllers/other/hr/edit.controller.js';
 import { hr_bulkUpload } from '../../../controllers/other/hr/bulkupload.controller.js';
 import { uploadCandidateDataHr } from '../../../controllers/other/hr/uploadCandidate.controller.js';
+import { MulterFunction } from '../../../config/multer/multer.js';
 
 const hrRouter = Router();
 console.log('oiwer9wer');
