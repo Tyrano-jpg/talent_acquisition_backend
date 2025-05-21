@@ -9,7 +9,6 @@ import { uploadCandidateDataPhp } from '../../../controllers/development/php/upl
 import { edit_php } from '../../../controllers/development/php/edit.controller.js';
 
 const phpRouter = Router();
-console.log('oiwer9wer');
 
 phpRouter.post(
   '/list',

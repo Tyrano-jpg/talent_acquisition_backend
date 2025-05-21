@@ -8,7 +8,6 @@ import { ios_bulkUpload } from '../../../controllers/development/iosDev/bulkuplo
 import { uploadCandidateDataIOS } from '../../../controllers/development/iosDev/uploadCandidate.Controller.js';
 import { edit_ios } from '../../../controllers/development/iosDev/edit.controller.js';
 const iosRouter = Router();
-console.log('oiwer9wer');
 
 iosRouter.post(
   '/list',

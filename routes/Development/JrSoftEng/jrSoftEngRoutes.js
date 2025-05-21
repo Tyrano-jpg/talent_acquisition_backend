@@ -9,7 +9,6 @@ import { uploadCandidateDataJrSoftEng } from '../../../controllers/development/j
 import { edit_jrsofteng } from '../../../controllers/development/jrSoftEng/edit.controller.js';
 
 const jrSoftEngRouter = Router();
-console.log('oiwer9wer');
 
 jrSoftEngRouter.post(
   '/list',

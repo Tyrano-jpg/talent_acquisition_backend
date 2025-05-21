@@ -9,7 +9,6 @@ import { listing_new_jrflutter } from '../../../controllers/development/jrFlutte
 import { edit_jrflutter } from '../../../controllers/development/jrFlutterDev/edit.controller.js';
 
 const jrFlutterRouter = Router();
-console.log('oiwer9wer');
 
 jrFlutterRouter.post(
   '/list',

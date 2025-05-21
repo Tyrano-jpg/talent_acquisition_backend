@@ -8,7 +8,6 @@ import { uploadCandidateDataHr } from '../../../controllers/other/hr/uploadCandi
 import { MulterFunction } from '../../../config/multer/multer.js';
 
 const hrRouter = Router();
-console.log('oiwer9wer');
 
 hrRouter.post(
   '/list',

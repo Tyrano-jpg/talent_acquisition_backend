@@ -9,7 +9,6 @@ import { listing_new_jrmern } from '../../../controllers/development/jrMern/jrme
 import { edit_jrmern } from '../../../controllers/development/jrMern/edit.controller.js';
 
 const jrMernRouter = Router();
-console.log('oiwer9wer');
 
 jrMernRouter.post(
   '/list',

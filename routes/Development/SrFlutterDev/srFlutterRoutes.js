@@ -9,7 +9,6 @@ import { listing_new_srflutter } from '../../../controllers/development/srFlutte
 import { editsrflutter } from '../../../controllers/development/srFlutterDev/edit.controller.js';
 
 const srFlutterRouter = Router();
-console.log('oiwer9wer');
 
 srFlutterRouter.post(
   '/list',

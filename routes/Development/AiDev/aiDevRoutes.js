@@ -8,7 +8,6 @@ import { aidev_bulkUpload } from '../../../controllers/development/aiDev/bulkupl
 import { uploadCandidateDataAIDev } from '../../../controllers/development/aiDev/uploadCandidate.controller.js';
 import { edit_ai } from '../../../controllers/development/aiDev/edit.controller.js';
 const aiDevRouter = Router();
-console.log('oiwer9wer');
 
 aiDevRouter.post(
   '/list',

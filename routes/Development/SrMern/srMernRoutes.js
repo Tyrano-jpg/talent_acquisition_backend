@@ -11,9 +11,9 @@ import { uploadCandidateDataSrMern } from '../../../controllers/development/srMe
 import { updateStatus } from '../../../controllers/development/srMern/updateStatus.controller.js';
 import { MulterFunction } from '../../../config/multer/multer.js';
 import { edit_srmern } from '../../../controllers/development/srMern/edit.controller.js';
+import { downloadCSVFormat } from '../../../controllers/development/srMern/generatecsv.js';
 
 const srMernRouter = Router();
-console.log('oiwer9wer');
 
 srMernRouter.post(
   '/list',
@@ -32,6 +32,6 @@ srMernRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).field
   { name: 'resume_file' },
 ]), uploadCandidateDataSrMern)
 
-// srMernRouter.post('/update-status', AuthMiddleware, updateStatus)
+srMernRouter.post('/download-csv', AuthMiddleware, downloadCSVFormat)
 
 export default srMernRouter;

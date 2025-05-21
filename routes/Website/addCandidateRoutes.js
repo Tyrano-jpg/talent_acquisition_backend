@@ -3,7 +3,6 @@ import { AddJobApplication } from '../../controllers/website/career/addcandidate
 import { MulterFunction } from '../../config/multer/multer.js';
 
 const careerRouter = Router();
-console.log('oiwer9wer');
 
 careerRouter.post(
   '/add-candidate',

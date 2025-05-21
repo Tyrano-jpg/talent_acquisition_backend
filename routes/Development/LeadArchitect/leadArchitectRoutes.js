@@ -8,7 +8,6 @@ import { uploadCandidateDataLeadArchitect } from '../../../controllers/developme
 import { listing_newleadarchitect } from '../../../controllers/development/leadArchitect/leadarchitect.controller.js';
 import { edit_leadarchitect } from '../../../controllers/development/leadArchitect/edit.controller.js';
 const leadArchitectRouter = Router();
-console.log('oiwer9wer');
 
 leadArchitectRouter.post(
   '/list',

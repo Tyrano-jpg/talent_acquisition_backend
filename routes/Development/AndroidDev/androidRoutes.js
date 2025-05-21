@@ -8,8 +8,6 @@ import { android_bulkUpload } from '../../../controllers/development/androidDev/
 import { uploadCandidateDataAndroid } from '../../../controllers/development/androidDev/uploadCandidate.controller.js';
 import { edit_android } from '../../../controllers/development/androidDev/edit.controller.js';
 const androidRouter = Router();
-console.log('oiwer9wer');
-
 androidRouter.post(
   '/list',
   AuthMiddleware,
