@@ -8,34 +8,52 @@ import applicationModel from "../../../database/schema/masters/CandidateApplicat
  */
 export const android_bulkUpload = async (req, res) => {
   try {
-    const { data } = req.body;
+    let { data } = req.body;
 
     if (!Array.isArray(data) || data.length === 0) {
       return res.status(400).json({ message: "No data provided or data is not in array format." });
     }
 
-    // Required fields
+    // ✅ Step 1: Clean field keys and values, and filter out blank rows
+    data = data
+      .map((row, index) => {
+        const cleaned = {};
+        for (const key in row) {
+          const cleanKey = key.trim().replace(/\uFEFF/g, "");
+          const value = row[key];
+          cleaned[cleanKey] = typeof value === "string" ? value.trim() : value;
+        }
+        return cleaned;
+      })
+      .filter((row, index) => {
+        const isEmpty = Object.values(row).every(val => !val || val === "");
+        if (isEmpty) {
+          console.warn(`Row ${index} is empty or invalid and will be skipped.`);
+        }
+        return !isEmpty;
+      });
+
+    // ✅ Required fields
     const requiredFields = ["email_id", "stack"];
     const missingFields = [];
     const duplicateEntries = [];
 
-    // **Step 1:** Collect all email IDs first
-    const emailList = data.map((item) => item.email_id);
+    // ✅ Email list for detecting duplicates
+    const emailList = data.map(item => item.email_id);
 
-    // **Step 2:** Loop through and validate
     const applications = data.map((item, index) => {
-      const missing = requiredFields.filter((field) => !item[field]);
-
+      // ✅ Missing required field check
+      const missing = requiredFields.filter(field => !item[field] || item[field].trim() === "");
       if (missing.length > 0) {
         missingFields.push({ index, missing });
       }
 
-      // **Step 3:** Duplicate check within the array itself
-      if (item.email_id) {
-        const isDuplicate = emailList.filter((email) => email === item.email_id).length > 1;
-        if (isDuplicate) {
-          duplicateEntries.push({ index, email_id: item.email_id });
-        }
+      // ✅ Duplicate email check
+      const isDuplicate =
+        item.email_id &&
+        emailList.filter(email => email === item.email_id).length > 1;
+      if (isDuplicate) {
+        duplicateEntries.push({ index, email_id: item.email_id });
       }
 
       return {
@@ -45,7 +63,6 @@ export const android_bulkUpload = async (req, res) => {
       };
     });
 
-    // If there are validation errors, respond with details
     if (missingFields.length > 0 || duplicateEntries.length > 0) {
       return res.status(400).json({
         message: "Validation errors in the provided data.",
@@ -54,14 +71,13 @@ export const android_bulkUpload = async (req, res) => {
       });
     }
 
-    // Bulk insert to MongoDB
+    // ✅ Insert into MongoDB
     await applicationModel.insertMany(applications);
 
     res.status(201).json({
       message: "Data uploaded successfully.",
       insertedCount: applications.length,
     });
-
   } catch (error) {
     console.error("Bulk upload error:", error.message);
     if (error instanceof mongoose.Error.ValidationError) {
