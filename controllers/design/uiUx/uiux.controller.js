@@ -52,7 +52,7 @@ export const listing_newuiux = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "ai_dev"
+    stack: "ui_ux"
   };
 
   const aggregate_stage = [

@@ -52,7 +52,7 @@ export const listing_new_bd = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "ba"
+    stack: "bd"
   };
 
   const aggregate_stage = [

@@ -75,6 +75,9 @@ app.use(`/api/${Configs.server.version}/other`, allOtherRouter)
 //design
 app.use(`/api/${Configs.server.version}/other`, allDesignRouter)
 
+//deployment
+// app.use()
+
 //website
 app.use(`/api/${Configs.server.version}/website`, allWebsiteRouter)
 

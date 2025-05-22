@@ -4,7 +4,7 @@ import { dynamic_filter } from '../../../utils/dymanicFilter.js';
 
 import catchAsync from '../../../utils/errors/catchAsync.js';
 
-export const listing_newgraphics = catchAsync(async (req, res, next) => {
+export const listing_newdevops= catchAsync(async (req, res, next) => {
   const {
     page = 1,
     limit = 10,
@@ -52,7 +52,7 @@ export const listing_newgraphics = catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "graphic"
+    stack: "dev_ops"
   };
 
   const aggregate_stage = [

@@ -52,7 +52,7 @@ export const listing_newdigitalmarketing= catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "ai_dev"
+    stack: "digital_marketing"
   };
 
   const aggregate_stage = [
