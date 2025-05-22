@@ -52,7 +52,7 @@ export const listing_newdevops= catchAsync(async (req, res, next) => {
     ...filterData,
     ...search_query,
     stage:stage,
-    stack: "dev_ops"
+    stack: "devops"
   };
 
   const aggregate_stage = [
