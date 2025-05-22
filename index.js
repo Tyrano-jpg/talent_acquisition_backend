@@ -73,7 +73,7 @@ app.use(`/api/${Configs.server.version}/development`, allDevelopmentRouter);
 app.use(`/api/${Configs.server.version}/other`, allOtherRouter)
 
 //design
-app.use(`/api/${Configs.server.version}/other`, allDesignRouter)
+app.use(`/api/${Configs.server.version}/design`, allDesignRouter)
 
 //deployment
 // app.use()
