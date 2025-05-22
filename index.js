@@ -16,6 +16,7 @@ import { globalErrorHandler } from './utils/errors/GlobalErrorHandler.js';
 import { checkServerHealth } from './controllers/auth.js';
 import allWebsiteRouter from './routes/Website/allWebsite.router.js';
 import allOtherRouter from './routes/Development/allOtherRoutes.js';
+import allDesignRouter from './routes/Design/allDesign.routes.js';
 // import { start_worker_thread } from './utils/constants.js';
 // import { insert_raw_machine_data_into_machine_mismatch_model } from './utils/workers/workers.js';
 // import { start_worker_thread } from './utils/constants.js';
@@ -70,6 +71,9 @@ app.use(`/api/${Configs.server.version}/development`, allDevelopmentRouter);
 
 //other
 app.use(`/api/${Configs.server.version}/other`, allOtherRouter)
+
+//design
+app.use(`/api/${Configs.server.version}/other`, allDesignRouter)
 
 //website
 app.use(`/api/${Configs.server.version}/website`, allWebsiteRouter)
