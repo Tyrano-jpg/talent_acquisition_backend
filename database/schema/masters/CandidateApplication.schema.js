@@ -11,7 +11,7 @@ const applicationSchema = new mongoose.Schema({
     unique: true,
   },
   contact_no: {
-    type: Number,
+    type: [Number],
     trim: true,
   },
   current_location: {
