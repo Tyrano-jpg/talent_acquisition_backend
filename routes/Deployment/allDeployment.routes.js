@@ -5,7 +5,7 @@ import qaRouter from './QA/qaRoutes.js'
 
 const allDeploymentRouter = express.Router()
 
-allDeploymentRouter.use('/dev-ops',AuthMiddleware, devOpsRouter)
+allDeploymentRouter.use('/devops',AuthMiddleware, devOpsRouter)
 allDeploymentRouter.use('/qa',AuthMiddleware, qaRouter)
 
 export default allDeploymentRouter
