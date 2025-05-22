@@ -43,11 +43,11 @@ const applicationSchema = new mongoose.Schema({
     trim: true,
   },
   current_ctc: {
-    type: Number,
+    type: String,
     trim: true,
   },
   expected_ctc: {
-    type: Number,
+    type: String,
     trim: true,
   },
   joining_preference: {
