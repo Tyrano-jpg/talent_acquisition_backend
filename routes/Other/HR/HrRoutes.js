@@ -6,6 +6,7 @@ import { edit_hr } from '../../../controllers/other/hr/edit.controller.js';
 import { hr_bulkUpload } from '../../../controllers/other/hr/bulkupload.controller.js';
 import { uploadCandidateDataHr } from '../../../controllers/other/hr/uploadCandidate.controller.js';
 import { MulterFunction } from '../../../config/multer/multer.js';
+import { downloadCSVHr } from '../../../controllers/other/hr/generatecsv.js';
 
 const hrRouter = Router();
 
@@ -26,6 +27,6 @@ hrRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataHr)
 
-// hrRouter.post('/update-status', AuthMiddleware, updateStatus)
+hrRouter.get('/download-csv', AuthMiddleware, downloadCSVHr)
 
 export default hrRouter;

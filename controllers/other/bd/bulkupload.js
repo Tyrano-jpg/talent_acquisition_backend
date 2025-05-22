@@ -6,7 +6,7 @@ import applicationModel from "../../../database/schema/masters/CandidateApplicat
  * @route   POST /api/bulk-upload
  * @access  Private
  */
-export const ba_bulkUpload = async (req, res) => {
+export const bd_bulkUpload = async (req, res) => {
   try {
     let { data } = req.body;
 

@@ -6,6 +6,7 @@ import { updating_ba } from '../../../controllers/other/ba/updateba.js';
 import { edit_ba } from '../../../controllers/other/ba/edit.controller.js';
 import { ba_bulkUpload } from '../../../controllers/other/ba/bulkupload.controller.js';
 import { uploadCandidateDataBa } from '../../../controllers/other/ba/uploadCandidate.controller.js';
+import { downloadCSVBa } from '../../../controllers/other/ba/generatecsv.js';
 
 const baRouter = Router();
 
@@ -26,6 +27,6 @@ baRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataBa)
 
-// hrRouter.post('/update-status', AuthMiddleware, updateStatus)
+baRouter.get('/download-csv', AuthMiddleware, downloadCSVBa)
 
 export default baRouter;

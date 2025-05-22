@@ -4,7 +4,7 @@ import { dynamic_filter } from '../../../utils/dymanicFilter.js';
 
 import catchAsync from '../../../utils/errors/catchAsync.js';
 
-export const listing_new_ba = catchAsync(async (req, res, next) => {
+export const listing_new_bd = catchAsync(async (req, res, next) => {
   const {
     page = 1,
     limit = 10,
