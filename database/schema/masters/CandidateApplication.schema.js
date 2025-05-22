@@ -11,7 +11,7 @@ const applicationSchema = new mongoose.Schema({
     unique: true,
   },
   contact_no: {
-    type: [String],
+    type: Number,
     trim: true,
   },
   current_location: {
@@ -39,15 +39,15 @@ const applicationSchema = new mongoose.Schema({
     trim: true,
   },
   relevant_experience: {
-    type: String,
+    type: Number,
     trim: true,
   },
   current_ctc: {
-    type: String,
+    type: Number,
     trim: true,
   },
   expected_ctc: {
-    type: String,
+    type: Number,
     trim: true,
   },
   joining_preference: {
