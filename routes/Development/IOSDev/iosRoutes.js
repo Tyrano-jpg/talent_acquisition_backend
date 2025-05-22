@@ -7,6 +7,7 @@ import { updating_ios } from '../../../controllers/development/iosDev/updateios.
 import { ios_bulkUpload } from '../../../controllers/development/iosDev/bulkupload.controller.js';
 import { uploadCandidateDataIOS } from '../../../controllers/development/iosDev/uploadCandidate.Controller.js';
 import { edit_ios } from '../../../controllers/development/iosDev/edit.controller.js';
+import { downloadCSVIos } from '../../../controllers/development/iosDev/generatecsv.js';
 const iosRouter = Router();
 
 iosRouter.post(
@@ -26,6 +27,6 @@ iosRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataIOS)
 
-// jrSoftEngRouter.post('/update-status', AuthMiddleware, updateStatus)
+iosRouter.get('/download-csv', AuthMiddleware, downloadCSVIos)
 
 export default iosRouter;

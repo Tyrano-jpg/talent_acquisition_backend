@@ -7,6 +7,7 @@ import { updating_jrflutter } from '../../../controllers/development/jrFlutterDe
 import { jrflutter_bulkUpload } from '../../../controllers/development/jrFlutterDev/bulkupload.controller.js';
 import { listing_new_jrflutter } from '../../../controllers/development/jrFlutterDev/jrflutter.controller.js';
 import { edit_jrflutter } from '../../../controllers/development/jrFlutterDev/edit.controller.js';
+import { downloadCSVJrFlutter } from '../../../controllers/development/jrFlutterDev/generatecsv.js';
 
 const jrFlutterRouter = Router();
 
@@ -27,6 +28,6 @@ jrFlutterRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fi
   { name: 'resume_file' },
 ]), uploadCandidateDataJrFlutter)
 
-// jrSoftEngRouter.post('/update-status', AuthMiddleware, updateStatus)
+jrFlutterRouter.get('/download-csv', AuthMiddleware, downloadCSVJrFlutter)
 
 export default jrFlutterRouter;

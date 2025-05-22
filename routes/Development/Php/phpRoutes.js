@@ -7,6 +7,7 @@ import { updating_php } from '../../../controllers/development/php/updatephp.js'
 import { php_bulkUpload } from '../../../controllers/development/php/bulkupload.controller.js';
 import { uploadCandidateDataPhp } from '../../../controllers/development/php/uploadCandidate.controller.js';
 import { edit_php } from '../../../controllers/development/php/edit.controller.js';
+import { downloadCSVPhp } from '../../../controllers/development/php/generatecsv.js';
 
 const phpRouter = Router();
 
@@ -27,6 +28,6 @@ phpRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataPhp)
 
-// jrSoftEngRouter.post('/update-status', AuthMiddleware, updateStatus)
+phpRouter.get('/download-csv', AuthMiddleware, downloadCSVPhp)
 
 export default phpRouter;

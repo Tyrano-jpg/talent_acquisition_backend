@@ -7,6 +7,7 @@ import { leadarchitect_bulkUpload } from '../../../controllers/development/leadA
 import { uploadCandidateDataLeadArchitect } from '../../../controllers/development/leadArchitect/uploadCandidate.Controller.js';
 import { listing_newleadarchitect } from '../../../controllers/development/leadArchitect/leadarchitect.controller.js';
 import { edit_leadarchitect } from '../../../controllers/development/leadArchitect/edit.controller.js';
+import { downloadCSVLeadArchitect } from '../../../controllers/development/leadArchitect/generatecsv.js';
 const leadArchitectRouter = Router();
 
 leadArchitectRouter.post(
@@ -26,6 +27,6 @@ leadArchitectRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`
   { name: 'resume_file' },
 ]), uploadCandidateDataLeadArchitect)
 
-// jrSoftEngRouter.post('/update-status', AuthMiddleware, updateStatus)
+leadArchitectRouter.get('/download-csv', AuthMiddleware, downloadCSVLeadArchitect)
 
 export default leadArchitectRouter;

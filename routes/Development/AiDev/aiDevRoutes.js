@@ -7,6 +7,7 @@ import { listing_newaidev } from '../../../controllers/development/aiDev/aidev.c
 import { aidev_bulkUpload } from '../../../controllers/development/aiDev/bulkupload.controller.js';
 import { uploadCandidateDataAIDev } from '../../../controllers/development/aiDev/uploadCandidate.controller.js';
 import { edit_ai } from '../../../controllers/development/aiDev/edit.controller.js';
+import { downloadCSVAi } from '../../../controllers/development/aiDev/generatecsv.js';
 const aiDevRouter = Router();
 
 aiDevRouter.post(
@@ -26,6 +27,6 @@ aiDevRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields
   { name: 'resume_file' },
 ]), uploadCandidateDataAIDev)
 
-// jrSoftEngRouter.post('/update-status', AuthMiddleware, updateStatus)
+aiDevRouter.get('download-csv', AuthMiddleware, downloadCSVAi)
 
 export default aiDevRouter;

@@ -8,17 +8,15 @@ import { listing_new_srmern } from '../../../controllers/development/srMern/new.
 import { updating_srmern } from '../../../controllers/development/srMern/updatesrmern.js';
 import { srmern_bulkUpload } from '../../../controllers/development/srMern/bulkupload.controller.js';
 import { uploadCandidateDataSrMern } from '../../../controllers/development/srMern/uploadCandidate.controller.js';
-import { updateStatus } from '../../../controllers/development/srMern/updateStatus.controller.js';
 import { MulterFunction } from '../../../config/multer/multer.js';
 import { edit_srmern } from '../../../controllers/development/srMern/edit.controller.js';
-import { downloadCSVFormat } from '../../../controllers/development/srMern/generatecsv.js';
+import { downloadCSVSrMern } from '../../../controllers/development/srMern/generatecsv.js';
 
 const srMernRouter = Router();
 
 srMernRouter.post(
   '/list',
   AuthMiddleware,
-  // RolesPermissions('user', 'add'),
   listing_new_srmern
 );
 
@@ -32,6 +30,6 @@ srMernRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).field
   { name: 'resume_file' },
 ]), uploadCandidateDataSrMern)
 
-srMernRouter.get('/download-csv', AuthMiddleware, downloadCSVFormat)
+srMernRouter.get('/download-csv', AuthMiddleware, downloadCSVSrMern)
 
 export default srMernRouter;

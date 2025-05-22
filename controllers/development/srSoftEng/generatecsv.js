@@ -7,7 +7,7 @@ import applicationModel from '../../../database/schema/masters/CandidateApplicat
  * @route   GET /api/download-csv-format
  * @access  Public/Private
  */
-export const downloadCSVSrMern = (req, res) => {
+export const downloadCSVSrSoftEng = (req, res) => {
   try {
     // ✅ Static template field names
     const fieldNames = [

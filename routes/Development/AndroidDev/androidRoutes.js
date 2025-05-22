@@ -7,6 +7,7 @@ import { updating_android } from '../../../controllers/development/androidDev/up
 import { android_bulkUpload } from '../../../controllers/development/androidDev/bulkupload.controller.js';
 import { uploadCandidateDataAndroid } from '../../../controllers/development/androidDev/uploadCandidate.controller.js';
 import { edit_android } from '../../../controllers/development/androidDev/edit.controller.js';
+import { downloadCSVAndroid } from '../../../controllers/development/androidDev/generatecsv.js';
 const androidRouter = Router();
 androidRouter.post(
   '/list',
@@ -25,6 +26,6 @@ androidRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fiel
   { name: 'resume_file' },
 ]), uploadCandidateDataAndroid)
 
-// jrSoftEngRouter.post('/update-status', AuthMiddleware, updateStatus)
+androidRouter.get('/download-csv', AuthMiddleware, downloadCSVAndroid)
 
 export default androidRouter;
