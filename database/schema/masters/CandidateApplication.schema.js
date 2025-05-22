@@ -72,6 +72,7 @@ const applicationSchema = new mongoose.Schema({
   },
   stage: {
     type: String,
+    default: "new",
     trim: true,
   },
   status: {
