@@ -7,7 +7,7 @@ import uiuxRouter from './UI-UX/uiUxRoutes.js'
 const allDesignRouter = express.Router()
 
 allDesignRouter.use('/digital-marketing',AuthMiddleware, digitalMarketingRouter)
-allDesignRouter.use('/graphics',AuthMiddleware, graphicRouter)
+allDesignRouter.use('/graphic',AuthMiddleware, graphicRouter)
 allDesignRouter.use('/ui-ux',AuthMiddleware, uiuxRouter)
 
 export default allDesignRouter
