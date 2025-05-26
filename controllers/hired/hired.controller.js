@@ -1,6 +1,7 @@
 import applicationModel from "../../database/schema/masters/CandidateApplication.schema.js";
-import { DynamicSearch } from "../../utils/dynamicSearch/dynamic.js";
+// import { DynamicSearch } from "../../utils/dynamicSearch/dynamic.js";
 import { dynamic_filter } from "../../utils/dymanicFilter.js";
+import { DynamicSearchHired } from "../../utils/dynamicSearch/dynamicHired.js";
 import catchAsync from "../../utils/errors/catchAsync.js";
 
 export const getHiredApplications = catchAsync(async (req, res) => {
@@ -22,7 +23,7 @@ export const getHiredApplications = catchAsync(async (req, res) => {
 
   let search_query = {};
   if (search !== "" && req?.body?.searchFields) {
-    const search_data = DynamicSearch(
+    const search_data = DynamicSearchHired(
       search,
       boolean,
       numbers,
@@ -30,13 +31,15 @@ export const getHiredApplications = catchAsync(async (req, res) => {
       arrayField
     );
 
-    if (!search_data?.length) {
+    // ✅ Correct check for non-empty search object
+    if (Object.keys(search_data).length === 0) {
       return res.status(404).json({
         success: false,
         data: [],
         message: "No results found.",
       });
     }
+
     search_query = search_data;
   }
 
