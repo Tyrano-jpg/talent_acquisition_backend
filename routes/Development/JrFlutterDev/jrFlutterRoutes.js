@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import AuthMiddleware from '../../../middlewares/verifyToken.js';
-import RolesPermissions from '../../../middlewares/permission.js';
 import { MulterFunction } from '../../../config/multer/multer.js';
 import { uploadCandidateDataJrFlutter } from '../../../controllers/development/jrFlutterDev/uploadCandidate.controller.js';
 import { updating_jrflutter } from '../../../controllers/development/jrFlutterDev/updatejrflutter.js';
@@ -24,7 +23,7 @@ jrFlutterRouter.post('/edit/:_id', AuthMiddleware, edit_jrflutter);
 
 jrFlutterRouter.post('/bulk-upload', AuthMiddleware, jrflutter_bulkUpload);
 
-jrFlutterRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+jrFlutterRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataJrFlutter)
 

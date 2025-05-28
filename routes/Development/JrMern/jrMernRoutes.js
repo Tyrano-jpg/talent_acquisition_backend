@@ -4,7 +4,7 @@ import RolesPermissions from '../../../middlewares/permission.js';
 import { MulterFunction } from '../../../config/multer/multer.js';
 import { updating_jrmern } from '../../../controllers/development/jrMern/updatingjrmern.js';
 import { jrmern_bulkUpload } from '../../../controllers/development/jrMern/bulkupload.controller.js';
-import { uploadCandidateData } from '../../../controllers/development/jrMern/uploadCandidate.controller.js';
+import { uploadCandidateData, uploadCandidateDataJrMern } from '../../../controllers/development/jrMern/uploadCandidate.controller.js';
 import { listing_new_jrmern } from '../../../controllers/development/jrMern/jrmern.controller.js';
 import { edit_jrmern } from '../../../controllers/development/jrMern/edit.controller.js';
 import { downloadCSVJrMern } from '../../../controllers/development/jrMern/generatecsv.js';
@@ -24,9 +24,9 @@ jrMernRouter.post('/edit/:_id', AuthMiddleware, edit_jrmern);
 
 jrMernRouter.post('/bulk-upload', AuthMiddleware, jrmern_bulkUpload);
 
-jrMernRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+jrMernRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
-]), uploadCandidateData)
+]), uploadCandidateDataJrMern)
 
 jrMernRouter.get('/download-csv', AuthMiddleware, downloadCSVJrMern)
 

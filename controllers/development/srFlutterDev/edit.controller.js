@@ -1,7 +1,7 @@
 import applicationModel from "../../../database/schema/masters/CandidateApplication.schema.js";
 import catchAsync from "../../../utils/errors/catchAsync.js";
 
-export const editsrflutter = catchAsync(async (req, res, next) => {
+export const edit_srflutter = catchAsync(async (req, res, next) => {
   const { _id } = req.params;
   const updateFields = req.body;
 
@@ -17,7 +17,17 @@ export const editsrflutter = catchAsync(async (req, res, next) => {
     });
   }
 
-  const updatedDoc = await applicationModel.findByIdAndUpdate(_id, { $set: updateFields }, { new: true });
+  // Update timestamp and updated_by using user_name instead of _id
+  updateFields.updated_at = new Date();
+  if (req.userDetails?.user_name) {
+    updateFields.updated_by = req.userDetails.user_name; // Store username here
+  }
+
+  const updatedDoc = await applicationModel.findByIdAndUpdate(
+    _id,
+    { $set: updateFields },
+    { new: true }
+  );
 
   if (!updatedDoc) {
     return res.status(500).json({

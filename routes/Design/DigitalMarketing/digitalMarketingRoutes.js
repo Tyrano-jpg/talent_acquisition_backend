@@ -21,7 +21,7 @@ digitalMarketingRouter.post('/edit/:_id', AuthMiddleware, edit_digitalmarketing)
 
 digitalMarketingRouter.post('/bulk-upload', AuthMiddleware, digitalmarketing_bulkUpload);
 
-digitalMarketingRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+digitalMarketingRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataDigitalMarketing)
 

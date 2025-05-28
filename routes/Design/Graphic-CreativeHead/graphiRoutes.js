@@ -22,7 +22,7 @@ graphicRouter.post('/edit/:_id', AuthMiddleware, edit_graphics);
 
 graphicRouter.post('/bulk-upload', AuthMiddleware, graphics_bulkUpload);
 
-graphicRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+graphicRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataGraphics)
 

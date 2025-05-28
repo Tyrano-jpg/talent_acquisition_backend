@@ -22,7 +22,7 @@ androidRouter.post('/edit/:_id', AuthMiddleware, edit_android);
 
 androidRouter.post('/bulk-upload', AuthMiddleware, android_bulkUpload);
 
-androidRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+androidRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataAndroid)
 

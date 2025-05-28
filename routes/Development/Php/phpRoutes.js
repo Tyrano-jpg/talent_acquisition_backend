@@ -24,7 +24,7 @@ phpRouter.post('/edit/:_id', AuthMiddleware, edit_php);
 
 phpRouter.post('/bulk-upload', AuthMiddleware, php_bulkUpload);
 
-phpRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+phpRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataPhp)
 

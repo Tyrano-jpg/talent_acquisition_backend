@@ -23,7 +23,7 @@ baRouter.post('/edit/:_id', AuthMiddleware, edit_ba);
 
 baRouter.post('/bulk-upload', AuthMiddleware, ba_bulkUpload);
 
-baRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+baRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataBa)
 

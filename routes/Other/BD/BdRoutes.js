@@ -22,7 +22,7 @@ bdRouter.post('/edit/:_id', AuthMiddleware, edit_bd);
 
 bdRouter.post('/bulk-upload', AuthMiddleware, bd_bulkUpload);
 
-bdRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+bdRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataBd)
 

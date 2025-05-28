@@ -22,7 +22,7 @@ uiuxRouter.post('/edit/:_id', AuthMiddleware, edit_uiux);
 
 uiuxRouter.post('/bulk-upload', AuthMiddleware, uiux_bulkUpload);
 
-uiuxRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+uiuxRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataUiUx)
 

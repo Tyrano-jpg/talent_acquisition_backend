@@ -5,8 +5,8 @@ import { listing_new_srsofteng } from '../../../controllers/development/srSoftEn
 import { updating_srsofteng } from '../../../controllers/development/srSoftEng/updatesrsofteng.js';
 import { srsofteng_bulkUpload } from '../../../controllers/development/srSoftEng/bulkupload.controller.js';
 import { uploadCandidateDataSrSoftEng } from '../../../controllers/development/srSoftEng/uploadCandidate.controller.js';
-import { edit_jrsofteng } from '../../../controllers/development/jrSoftEng/edit.controller.js';
 import { downloadCSVJrSoftEng } from '../../../controllers/development/jrSoftEng/genratecsv.js';
+import { edit_srsofteng } from '../../../controllers/development/srSoftEng/edit.controller.js';
 
 const srSoftEngRouter = Router();
 
@@ -19,11 +19,11 @@ srSoftEngRouter.post(
 
 srSoftEngRouter.post('/update/:_id', AuthMiddleware, updating_srsofteng);
 
-srSoftEngRouter.post('/edit/:id', AuthMiddleware, edit_jrsofteng)
+srSoftEngRouter.post('/edit/:id', AuthMiddleware, edit_srsofteng)
 
 srSoftEngRouter.post('/bulk-upload', AuthMiddleware, srsofteng_bulkUpload);
 
-srSoftEngRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+srSoftEngRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataSrSoftEng)
 

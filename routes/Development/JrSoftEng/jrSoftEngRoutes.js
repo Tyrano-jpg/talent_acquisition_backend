@@ -24,7 +24,7 @@ jrSoftEngRouter.post('/edit/:id', AuthMiddleware, edit_jrsofteng)
 
 jrSoftEngRouter.post('/bulk-upload', AuthMiddleware, jrsofteng_bulkUpload);
 
-jrSoftEngRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+jrSoftEngRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataJrSoftEng)
 

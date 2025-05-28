@@ -23,7 +23,7 @@ qaRouter.post('/edit/:_id', AuthMiddleware, edit_qa);
 
 qaRouter.post('/bulk-upload', AuthMiddleware, qa_bulkUpload);
 
-qaRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+qaRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataQa)
 

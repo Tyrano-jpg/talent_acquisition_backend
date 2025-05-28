@@ -23,7 +23,7 @@ aiDevRouter.post('/edit/:_id', AuthMiddleware, edit_ai);
 
 aiDevRouter.post('/bulk-upload', AuthMiddleware, aidev_bulkUpload);
 
-aiDevRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+aiDevRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataAIDev)
 

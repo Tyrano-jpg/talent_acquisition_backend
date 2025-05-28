@@ -1,22 +1,25 @@
 import applicationModel from "../../../database/schema/masters/CandidateApplication.schema.js";
 import catchAsync from "../../../utils/errors/catchAsync.js";
 
-export const uploadCandidateData = catchAsync(async (req, res) => {
-    var data = { ...req.body };
-  
-    const resumeFile = req.files?.resume_file;
-    let resume_file;
-    
-    if (resumeFile && resumeFile?.length > 0 && resumeFile?.[0]) {
-      resume_file = resumeFile?.[0];
-      data.resume_file = resume_file;
-    }
-  
-    const savedApplication = await applicationModel.create(data);
-  
-    return res.status(201).json({
-      status: true,
-      data: savedApplication,
-      message: "Application submitted! Will reach out soon!",
-    });
+export const uploadCandidateDataJrMern = catchAsync(async (req, res) => {
+  let data = { ...req.body };
+
+  const resumeFile = req.files?.resume_file;
+  if (resumeFile?.length > 0 && resumeFile[0]) {
+    data.resume_file = resumeFile[0];
+  }
+
+  // Set created_by as user_name instead of _id
+  if (req.userDetails?.user_name) {
+    data.created_by = req.userDetails.user_name;
+    data.created_at = new Date();
+  }
+
+  const savedApplication = await applicationModel.create(data);
+
+  return res.status(201).json({
+    status: true,
+    data: savedApplication,
+    message: "Application submitted! Will reach out soon!",
   });
+});

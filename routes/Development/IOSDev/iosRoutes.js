@@ -23,7 +23,7 @@ iosRouter.post('/edit/:_id', AuthMiddleware, edit_ios);
 
 iosRouter.post('/bulk-upload', AuthMiddleware, ios_bulkUpload);
 
-iosRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+iosRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataIOS)
 

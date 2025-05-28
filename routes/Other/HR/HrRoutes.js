@@ -23,7 +23,7 @@ hrRouter.post('/edit/:_id', AuthMiddleware, edit_hr);
 
 hrRouter.post('/bulk-upload', AuthMiddleware, hr_bulkUpload);
 
-hrRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+hrRouter.post('/upload-candidate',AuthMiddleware, MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataHr)
 

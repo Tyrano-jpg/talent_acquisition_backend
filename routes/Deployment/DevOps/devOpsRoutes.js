@@ -23,7 +23,7 @@ devOpsRouter.post('/edit/:_id', AuthMiddleware, edit_devops);
 
 devOpsRouter.post('/bulk-upload', AuthMiddleware, devops_bulkUpload);
 
-devOpsRouter.post('/upload-candidate', MulterFunction(`public/upload/pdf`).fields([
+devOpsRouter.post('/upload-candidate',AuthMiddleware,  MulterFunction(`public/upload/pdf`).fields([
   { name: 'resume_file' },
 ]), uploadCandidateDataDevOps)
 
