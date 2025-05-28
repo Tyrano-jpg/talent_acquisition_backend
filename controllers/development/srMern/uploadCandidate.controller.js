@@ -14,7 +14,7 @@ export const uploadCandidateDataSrMern = catchAsync(async (req, res) => {
     data.created_by = req.userDetails._id;
     data.created_at = new Date();
   }
-
+  
   const savedApplication = await applicationModel.create(data);
 
   return res.status(201).json({
