@@ -17,10 +17,10 @@ export const edit_srmern = catchAsync(async (req, res, next) => {
     });
   }
 
-  // Update timestamp and updated_by admin ID
+  // Update timestamp and updated_by using user_name instead of _id
   updateFields.updated_at = new Date();
-  if (req.userDetails && req.userDetails._id) {
-    updateFields.updated_by = req.userDetails._id;
+  if (req.userDetails?.user_name) {
+    updateFields.updated_by = req.userDetails.user_name; // Store username here
   }
 
   const updatedDoc = await applicationModel.findByIdAndUpdate(
