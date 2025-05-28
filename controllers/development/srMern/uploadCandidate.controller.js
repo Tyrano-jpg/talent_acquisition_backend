@@ -9,12 +9,12 @@ export const uploadCandidateDataSrMern = catchAsync(async (req, res) => {
     data.resume_file = resumeFile[0];
   }
 
-  // Set created_by and created_at fields
-  if (req.userDetails && req.userDetails._id) {
-    data.created_by = req.userDetails._id;
+  // Set created_by as user_name instead of _id
+  if (req.userDetails?.user_name) {
+    data.created_by = req.userDetails.user_name;
     data.created_at = new Date();
   }
-  
+
   const savedApplication = await applicationModel.create(data);
 
   return res.status(201).json({
