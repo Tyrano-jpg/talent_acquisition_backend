@@ -19,6 +19,7 @@ import allOtherRouter from './routes/Development/allOtherRoutes.js';
 import allDesignRouter from './routes/Design/allDesign.routes.js';
 import allDeploymentRouter from './routes/Deployment/allDeployment.routes.js';
 import allHiredtRouter from './routes/Hired/allHiredRoutes.js';
+import allDashboardRouter from './routes/Dashboard/allDashboardRoutes.js';
 // import { start_worker_thread } from './utils/constants.js';
 // import { insert_raw_machine_data_into_machine_mismatch_model } from './utils/workers/workers.js';
 // import { start_worker_thread } from './utils/constants.js';
@@ -79,10 +80,12 @@ app.use(`/api/${Configs.server.version}/design`, allDesignRouter)
 
 //deployment
 app.use(`/api/${Configs.server.version}/deployment`, allDeploymentRouter)
-// app.use()
 
 //hired
 app.use(`/api/${Configs.server.version}/hired`, allHiredtRouter)
+
+//dashboard
+app.use(`/api/${Configs.server.version}/dashboard`, allDashboardRouter)
 
 //website
 app.use(`/api/${Configs.server.version}/website`, allWebsiteRouter)
