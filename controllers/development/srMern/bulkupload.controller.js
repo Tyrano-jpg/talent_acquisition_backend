@@ -60,6 +60,7 @@ export const srmern_bulkUpload = async (req, res) => {
         ...item,
         created_at: new Date(),
         updated_at: new Date(),
+        created_by: req.userDetails?.user_name || "system", // <-- Add username here
       };
     });
 
