@@ -17,7 +17,7 @@ export const edit_srmern = catchAsync(async (req, res, next) => {
     });
   }
 
-  // Add updated_at field with the current date
+  // Manually set the updated_at field to current date
   updateFields.updated_at = new Date();
 
   const updatedDoc = await applicationModel.findByIdAndUpdate(

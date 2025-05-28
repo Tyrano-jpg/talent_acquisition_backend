@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { now, Schema } from "mongoose";
 
 const applicationSchema = new mongoose.Schema({
   full_name: {
@@ -94,7 +94,8 @@ const applicationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
   },
   updated_at: {
-    type: Date
+    type: Date,
+    default: Date.now
   },
   stack: {
     type: String,
