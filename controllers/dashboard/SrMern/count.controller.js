@@ -1,4 +1,5 @@
-import applicationModel from "../models/applicationModel.js"; // adjust path if needed
+import applicationModel from "../../../database/schema/masters/CandidateApplication.schema";
+
 
 export const getApplicationStats = async (req, res) => {
   try {
@@ -19,21 +20,21 @@ export const getApplicationStats = async (req, res) => {
       offerLetterTrue,
       stageRejected
     ] = await Promise.all([
-      // Interview + sendForApproval = true
+      // Interview + sendForApproval
       applicationModel.countDocuments({
         ...stackFilter,
         stage: "interview",
         "core_invoice_details.approval_status.sendForApproval.status": true,
       }),
 
-      // Interview + approved = true
+      // Interview + approved
       applicationModel.countDocuments({
         ...stackFilter,
         stage: "interview",
         "core_invoice_details.approval_status.approved.status": true,
       }),
 
-      // Interview + rejected = true
+      // Interview + rejected
       applicationModel.countDocuments({
         ...stackFilter,
         stage: "interview",
@@ -52,34 +53,34 @@ export const getApplicationStats = async (req, res) => {
         stage: "shortlisted",
       }),
 
-      // Assignment + sendForApproval = true
+      // Assignment + sendForApproval
       applicationModel.countDocuments({
         ...stackFilter,
         stage: "assignment",
         "core_invoice_details.approval_status.sendForApproval.status": true,
       }),
 
-      // Assignment + approved = true
+      // Assignment + approved
       applicationModel.countDocuments({
         ...stackFilter,
         stage: "assignment",
         "core_invoice_details.approval_status.approved.status": true,
       }),
 
-      // Assignment + rejected = true
+      // Assignment + rejected
       applicationModel.countDocuments({
         ...stackFilter,
         stage: "assignment",
         "core_invoice_details.approval_status.rejected.status": true,
       }),
 
-      // BGV true
+      // BGV
       applicationModel.countDocuments({
         ...stackFilter,
         bgv: true,
       }),
 
-      // Offer Letter true
+      // Offer Letter
       applicationModel.countDocuments({
         ...stackFilter,
         offer_letter: true,
