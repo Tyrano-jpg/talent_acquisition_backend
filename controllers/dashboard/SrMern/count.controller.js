@@ -1,4 +1,4 @@
-import applicationModel from "../../../database/schema/masters/CandidateApplication.schema";
+import applicationModel from "../../../database/schema/masters/CandidateApplication.schema.js";
 
 
 export const srmern_count = async (req, res) => {
