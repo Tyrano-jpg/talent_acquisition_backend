@@ -40,7 +40,8 @@ const applicationSchema = new mongoose.Schema({
   },
   interview_assigned_to: {
     type: String,
-    trim: true
+    trim: true,
+    default: "none",
   },
   relevant_experience: {
     type: Number,
