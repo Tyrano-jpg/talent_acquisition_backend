@@ -13,7 +13,9 @@ export const srmern_count = async (req, res) => {
       stageShortlisted,
       assignmentSendForApproval,
       assignmentApproved,
-      assignmentRejected
+      assignmentRejected,
+      bgvTrue,
+      offerLetterTrue
     ] = await Promise.all([
       // 1. Interview + sendForApproval = true
       applicationModel.countDocuments({
@@ -68,6 +70,18 @@ export const srmern_count = async (req, res) => {
         stage: "assignment",
         "core_invoice_details.approval_status.rejected.status": true,
       }),
+
+      // 9. BGV true
+      applicationModel.countDocuments({
+        ...stackFilter,
+        bgv: true,
+      }),
+
+      // 10. Offer Letter true
+      applicationModel.countDocuments({
+        ...stackFilter,
+        offer_letter: true,
+      }),
     ]);
 
     res.status(200).json({
@@ -78,7 +92,9 @@ export const srmern_count = async (req, res) => {
       stageShortlisted,
       assignmentSendForApproval,
       assignmentApproved,
-      assignmentRejected
+      assignmentRejected,
+      bgvTrue,
+      offerLetterTrue
     });
   } catch (error) {
     console.error("Error fetching stats:", error);

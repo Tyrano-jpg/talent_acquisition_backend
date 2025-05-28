@@ -1,4 +1,5 @@
 import mongoose, { now, Schema } from "mongoose";
+import { type } from "os";
 
 const applicationSchema = new mongoose.Schema({
   full_name: {
@@ -92,6 +93,12 @@ const applicationSchema = new mongoose.Schema({
   },
   updated_by: {
     type: mongoose.Schema.Types.String,
+  },
+  bgv: {
+    type: Boolean,
+  },
+  offer_letter: {
+    type: Boolean
   },
   updated_at: {
     type: Date,
