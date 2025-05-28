@@ -85,13 +85,13 @@ const applicationSchema = new mongoose.Schema({
     trim: true
   },
   created_by: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.String,
   },
   created_at: {
     type: Date
   },
   updated_by: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.String,
   },
   updated_at: {
     type: Date,
