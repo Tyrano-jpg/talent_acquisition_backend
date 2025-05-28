@@ -17,7 +17,14 @@ export const edit_srmern = catchAsync(async (req, res, next) => {
     });
   }
 
-  const updatedDoc = await applicationModel.findByIdAndUpdate(_id, { $set: updateFields }, { new: true });
+  // Add updated_at field with the current date
+  updateFields.updated_at = new Date();
+
+  const updatedDoc = await applicationModel.findByIdAndUpdate(
+    _id,
+    { $set: updateFields },
+    { new: true }
+  );
 
   if (!updatedDoc) {
     return res.status(500).json({
