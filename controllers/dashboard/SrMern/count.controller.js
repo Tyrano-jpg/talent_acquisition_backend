@@ -1,7 +1,7 @@
 import applicationModel from "../../../database/schema/masters/CandidateApplication.schema";
 
 
-export const getApplicationStats = async (req, res) => {
+export const srmern_count = async (req, res) => {
   try {
     const { stack = "sr_mern" } = req.body; // default to 'sr_mern' if not provided
 
