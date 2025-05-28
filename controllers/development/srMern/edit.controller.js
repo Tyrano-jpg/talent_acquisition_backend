@@ -17,8 +17,11 @@ export const edit_srmern = catchAsync(async (req, res, next) => {
     });
   }
 
-  // Manually set the updated_at field to current date
+  // Update timestamp and updated_by admin ID
   updateFields.updated_at = new Date();
+  if (req.userDetails && req.userDetails._id) {
+    updateFields.updated_by = req.userDetails._id;
+  }
 
   const updatedDoc = await applicationModel.findByIdAndUpdate(
     _id,
