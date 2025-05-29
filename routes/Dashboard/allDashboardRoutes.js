@@ -3,7 +3,7 @@ import srMernDashboardRouter from './SrMern/srMern.js';
 
 const allDashboardRouter = express.Router();
 
-allDashboardRouter.use('/sr-mern', srMernDashboardRouter)
+allDashboardRouter.use('/stats', srMernDashboardRouter)
 
 
 export default allDashboardRouter;

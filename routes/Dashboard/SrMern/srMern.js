@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import AuthMiddleware from '../../../middlewares/verifyToken.js';
-import { srmern_count } from '../../../controllers/dashboard/SrMern/count.controller.js';
+import { stats_count } from '../../../controllers/dashboard/SrMern/count.controller.js';
 
-const srMernDashboardRouter = Router();
+const statsRouter = Router();
 
-srMernDashboardRouter.post('/count', AuthMiddleware, srmern_count);
+statsRouter.post('/count', AuthMiddleware, stats_count);
 
 
-export default srMernDashboardRouter;
+export default statsRouter;

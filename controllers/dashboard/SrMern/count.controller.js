@@ -1,111 +1,109 @@
 import applicationModel from "../../../database/schema/masters/CandidateApplication.schema.js";
 
-
-export const srmern_count = async (req, res) => {
+export const stats_count = async (req, res) => {
   try {
-    const { stack = "sr_mern" } = req.body; // default to 'sr_mern' if not provided
+    const { stack = "sr_mern" } = req.body;
 
-    const stackFilter = { stack };
-
-    const [
-      interviewSendForApproval,
-      interviewApproved,
-      interviewRejected,
-      stageNew,
-      stageShortlisted,
-      assignmentSendForApproval,
-      assignmentApproved,
-      assignmentRejected,
-      bgvTrue,
-      offerLetterTrue,
-      stageRejected
-    ] = await Promise.all([
-      // Interview + sendForApproval
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "interview",
-        "core_invoice_details.approval_status.sendForApproval.status": true,
-      }),
-
-      // Interview + approved
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "interview",
-        "core_invoice_details.approval_status.approved.status": true,
-      }),
-
-      // Interview + rejected
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "interview",
-        "core_invoice_details.approval_status.rejected.status": true,
-      }),
-
-      // Stage = new
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "new",
-      }),
-
-      // Stage = shortlisted
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "shortlisted",
-      }),
-
-      // Assignment + sendForApproval
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "assignment",
-        "core_invoice_details.approval_status.sendForApproval.status": true,
-      }),
-
-      // Assignment + approved
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "assignment",
-        "core_invoice_details.approval_status.approved.status": true,
-      }),
-
-      // Assignment + rejected
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "assignment",
-        "core_invoice_details.approval_status.rejected.status": true,
-      }),
-
-      // BGV
-      applicationModel.countDocuments({
-        ...stackFilter,
-        bgv: true,
-      }),
-
-      // Offer Letter
-      applicationModel.countDocuments({
-        ...stackFilter,
-        offer_letter: true,
-      }),
-
-      // Stage = rejected
-      applicationModel.countDocuments({
-        ...stackFilter,
-        stage: "rejected",
-      }),
+    const result = await applicationModel.aggregate([
+      { $match: { stack } },
+      {
+        $facet: {
+          interviewSendForApproval: [
+            {
+              $match: {
+                stage: "interview",
+                "core_invoice_details.approval_status.sendForApproval.status": true
+              }
+            },
+            { $count: "count" }
+          ],
+          interviewApproved: [
+            {
+              $match: {
+                stage: "interview",
+                "core_invoice_details.approval_status.approved.status": true
+              }
+            },
+            { $count: "count" }
+          ],
+          interviewRejected: [
+            {
+              $match: {
+                stage: "interview",
+                "core_invoice_details.approval_status.rejected.status": true
+              }
+            },
+            { $count: "count" }
+          ],
+          stageNew: [
+            { $match: { stage: "new" } },
+            { $count: "count" }
+          ],
+          stageShortlisted: [
+            { $match: { stage: "shortlisted" } },
+            { $count: "count" }
+          ],
+          assignmentSendForApproval: [
+            {
+              $match: {
+                stage: "assignment",
+                "core_invoice_details.approval_status.sendForApproval.status": true
+              }
+            },
+            { $count: "count" }
+          ],
+          assignmentApproved: [
+            {
+              $match: {
+                stage: "assignment",
+                "core_invoice_details.approval_status.approved.status": true
+              }
+            },
+            { $count: "count" }
+          ],
+          assignmentRejected: [
+            {
+              $match: {
+                stage: "assignment",
+                "core_invoice_details.approval_status.rejected.status": true
+              }
+            },
+            { $count: "count" }
+          ],
+          bgvTrue: [
+            { $match: { bgv: true } },
+            { $count: "count" }
+          ],
+          offerLetterTrue: [
+            { $match: { offer_letter: true } },
+            { $count: "count" }
+          ],
+          stageRejected: [
+            { $match: { stage: "rejected" } },
+            { $count: "count" }
+          ]
+        }
+      }
     ]);
 
+    // Flatten the result and default to 0 if no match
+    const format = (item) => (item[0]?.count || 0);
+    const data = result[0];
+
     res.status(200).json({
-      interviewSendForApproval,
-      interviewApproved,
-      interviewRejected,
-      stageNew,
-      stageShortlisted,
-      assignmentSendForApproval,
-      assignmentApproved,
-      assignmentRejected,
-      bgvTrue,
-      offerLetterTrue,
-      stageRejected
+      interviewSendForApproval: format(data.interviewSendForApproval),
+      interviewApproved: format(data.interviewApproved),
+      interviewRejected: format(data.interviewRejected),
+      stageNew: format(data.stageNew),
+      stageShortlisted: format(data.stageShortlisted),
+      assignmentSendForApproval: format(data.assignmentSendForApproval),
+      assignmentApproved: format(data.assignmentApproved),
+      assignmentRejected: format(data.assignmentRejected),
+      bgvTrue: format(data.bgvTrue),
+      offerLetterTrue: format(data.offerLetterTrue),
+      stageRejected: format(data.stageRejected)
     });
+
   } catch (error) {
     console.error("Error fetching application stats:", error);
     res.status(500).json({ error: "Failed to fetch application stats" });
