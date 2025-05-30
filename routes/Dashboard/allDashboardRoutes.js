@@ -1,5 +1,5 @@
 import express from 'express';
-import srMernDashboardRouter from './SrMern/srMern.js';
+import srMernDashboardRouter from './dashboardRoutes/srMern.js';
 
 const allDashboardRouter = express.Router();
 

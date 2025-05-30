@@ -94,11 +94,17 @@ const applicationSchema = new mongoose.Schema({
   updated_by: {
     type: mongoose.Schema.Types.String,
   },
+  date_of_joining: {
+    type: Date,
+    default: null
+  },
   bgv: {
     type: Boolean,
+    default: false,
   },
   offer_letter: {
-    type: Boolean
+    type: Boolean,
+    default: false,
   },
   updated_at: {
     type: Date,
