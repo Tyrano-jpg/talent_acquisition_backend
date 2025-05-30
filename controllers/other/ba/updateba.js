@@ -11,7 +11,6 @@ export const updating_ba = catchAsync(async (req, res, next) => {
   console.log("Offer Letter Flag:", offer_letter);
   console.log("BGV Flag:", bgv);
 
-  // ✅ Improved validation: Allow multiple valid values
   const isValidUpdate =
     !!stage ||
     !!core_invoice_details ||
@@ -28,7 +27,6 @@ export const updating_ba = catchAsync(async (req, res, next) => {
     });
   }
 
-  // ✅ Find the existing document
   const existingModel = await applicationModel.findById(_id);
   if (!existingModel) {
     return res.status(404).json({
@@ -40,12 +38,12 @@ export const updating_ba = catchAsync(async (req, res, next) => {
 
   const updateData = { $set: {} };
 
-  // ✅ Optional: update stage
+  // Optional: update stage
   if (stage) {
     updateData.$set.stage = stage;
   }
 
-  // ✅ Optional: update approval status
+  // Optional: update approval status
   if (core_invoice_details?.approval_status) {
     const { sendForApproval, approved, rejected } = core_invoice_details.approval_status;
 
@@ -62,19 +60,24 @@ export const updating_ba = catchAsync(async (req, res, next) => {
     }
   }
 
-  // ✅ Optional: update offer_letter
+  // Optional: update offer_letter
   if (offer_letter === "true" || offer_letter === true) {
     updateData.$set.offer_letter = true;
   }
 
-  // ✅ Optional: update bgv
+  // Optional: update bgv
   if (bgv === "done" || bgv === true) {
     updateData.$set.bgv = true;
   }
 
+  // ✅ Set updated_by and updated_at
+  updateData.$set.updated_at = new Date();
+  if (req.userDetails?.user_name) {
+    updateData.$set.updated_by = req.userDetails.user_name;
+  }
+
   console.log("Update Data:", updateData);
 
-  // ✅ Perform the update
   const updatedModel = await applicationModel.findOneAndUpdate(
     { _id },
     updateData,
