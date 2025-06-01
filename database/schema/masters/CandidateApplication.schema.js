@@ -32,8 +32,9 @@ const applicationSchema = new mongoose.Schema({
     trim: true,
   },
   key_skill: {
-    type: String,
+    type: [String], 
     trim: true,
+    required: true,
   },
   notice_period: {
     type: String,
