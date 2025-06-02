@@ -31,7 +31,7 @@ export const devops_bulkUpload = async (req, res) => {
             cleaned[cleanKey] = typeof value === "string" ? value.trim() : value;
           }
         }
-
+        return cleaned;
       })
       .filter((row, index) => {
         const isEmpty = Object.values(row).every(val => !val || val === "");
