@@ -41,6 +41,11 @@ export const updating_ios = catchAsync(async (req, res, next) => {
   // Optional: update stage
   if (stage) {
     updateData.$set.stage = stage;
+
+    // ✅ Auto-set approval flags when stage is updated
+    updateData.$set["core_invoice_details.approval_status.sendForApproval.status"] = true;
+    updateData.$set["core_invoice_details.approval_status.approved.status"] = false;
+    updateData.$set["core_invoice_details.approval_status.rejected.status"] = false;
   }
 
   // Optional: update approval status
