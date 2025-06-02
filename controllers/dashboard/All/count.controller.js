@@ -35,8 +35,8 @@ export const stats_count = catchAsync(async (req, res) => {
           },
           { $count: "count" }
         ],
-        stageNew: [
-          { $match: { stage: "new" } },
+        stageHired: [  // 🔄 Changed from stageNew to stageHired
+          { $match: { stage: "hired" } },
           { $count: "count" }
         ],
         stageShortlisted: [
@@ -93,7 +93,7 @@ export const stats_count = catchAsync(async (req, res) => {
     interviewSendForApproval: format(data.interviewSendForApproval),
     interviewApproved: format(data.interviewApproved),
     interviewRejected: format(data.interviewRejected),
-    stageNew: format(data.stageNew),
+    stageHired: format(data.stageHired),  // 🔄 Changed key from stageNew to stageHired
     stageShortlisted: format(data.stageShortlisted),
     assignmentSendForApproval: format(data.assignmentSendForApproval),
     assignmentApproved: format(data.assignmentApproved),
