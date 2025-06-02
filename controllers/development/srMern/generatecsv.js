@@ -1,16 +1,17 @@
-import { format } from 'fast-csv';
-import { Readable } from 'stream';
-import applicationModel from '../../../database/schema/masters/CandidateApplication.schema.js';
+import ExcelJS from 'exceljs';
 
 /**
- * @desc    Download CSV format template for uploading
- * @route   GET /api/download-csv-format
+ * @desc    Download Excel format template for uploading
+ * @route   GET /api/download-excel-format
  * @access  Public/Private
  */
-export const downloadCSVSrMern = (req, res) => {
+export const downloadCSVSrMern = async (req, res) => {
   try {
-    // ✅ Static template field names
-    const fieldNames = [
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Application Template');
+
+    // Define headers
+    const headers = [
       'full_name',
       'email_id',
       'contact_no',
@@ -27,19 +28,42 @@ export const downloadCSVSrMern = (req, res) => {
       'stack',
     ];
 
-    const csvStream = format({ headers: fieldNames });
-    const readable = new Readable();
-    readable._read = () => { };
-    readable.push(null); // No row data; just headers
+    // Add header row
+    worksheet.addRow(headers);
 
-    res.setHeader('Content-Disposition', 'attachment; filename=application_upload_template.csv');
-    res.setHeader('Content-Type', 'text/csv');
+    // Stack dropdown options
+    const stackOptions = [
+      'sr_mern', 'jr_mern', 'sr_soft_eng', 'jr_soft_eng', 'php',
+      'sr_flutter', 'jr_flutter', 'android', 'ios', 'lead_architect',
+      'ai_dev', 'graphic', 'ui_ux', 'devops', 'qa',
+      'digital_marketing', 'hr', 'bd', 'ba',
+    ];
 
-    csvStream.pipe(res);
-    csvStream.write({}); // Writes only headers
-    csvStream.end();
+    // Column index for 'stack'
+    const stackCol = headers.indexOf('stack') + 1;
+
+    // Add data validation to rows 2–100 for stack column
+    for (let i = 2; i <= 100; i++) {
+      worksheet.getCell(i, stackCol).dataValidation = {
+        type: 'list',
+        allowBlank: true,
+        formulae: [`"${stackOptions.join(',')}"`],
+        showErrorMessage: true,
+        errorTitle: 'Invalid Stack',
+        error: 'Choose a valid stack from the dropdown.',
+      };
+    }
+
+    // Set response headers
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', 'attachment; filename=application_upload_template.xlsx');
+
+    // Write the file to the response
+    await workbook.xlsx.write(res);
+    res.end();
+
   } catch (error) {
-    console.error('Error generating CSV file:', error);
-    res.status(500).json({ message: 'Failed to generate CSV format' });
+    console.error('Error generating Excel file:', error);
+    res.status(500).json({ message: 'Failed to generate Excel file' });
   }
 };
