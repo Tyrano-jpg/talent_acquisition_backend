@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import applicationModel from "../../../database/schema/masters/CandidateApplication.schema.js";
-import { isEmpty } from "bullmq";
 
 /**
  * @desc    Bulk upload data to the database
@@ -21,16 +20,8 @@ export const srmern_bulkUpload = async (req, res) => {
         const cleaned = {};
         for (const key in row) {
           const cleanKey = key.trim().replace(/\uFEFF/g, "");
-          let value = row[key];
-
-          if (cleanKey === "key_skill" && typeof value === "string") {
-            cleaned[cleanKey] = value
-              .split(",")
-              .map(skill => skill.trim())
-              .filter(Boolean); // Remove empty strings
-          } else {
-            cleaned[cleanKey] = typeof value === "string" ? value.trim() : value;
-          }
+          const value = row[key];
+          cleaned[cleanKey] = typeof value === "string" ? value.trim() : value;
         }
         return cleaned;
       })
