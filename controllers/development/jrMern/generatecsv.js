@@ -14,15 +14,12 @@ export const downloadCSVJrMern = (req, res) => {
       'full_name',
       'email_id',
       'contact_no',
-      'current_location',
       'current_org',
-      'role',
-      'industry',
       'key_skill',
       'notice_period',
       'relevant_experience',
-      'current_ctc',
-      'expected_ctc',
+      'current_ctc (eg: 420000)',
+      'expected_ctc (eg: 420000)',
       'joining_preference',
       'source',
       'resume_file',
@@ -32,7 +29,7 @@ export const downloadCSVJrMern = (req, res) => {
 
     const csvStream = format({ headers: fieldNames });
     const readable = new Readable();
-    readable._read = () => {};
+    readable._read = () => { };
     readable.push(null); // No row data; just headers
 
     res.setHeader('Content-Disposition', 'attachment; filename=application_upload_template.csv');

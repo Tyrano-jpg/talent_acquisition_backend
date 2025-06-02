@@ -14,10 +14,7 @@ export const downloadCSVSrFlutter = (req, res) => {
       'full_name',
       'email_id',
       'contact_no',
-      'current_location',
       'current_org',
-      'role',
-      'industry',
       'key_skill',
       'notice_period',
       'relevant_experience',
@@ -32,7 +29,7 @@ export const downloadCSVSrFlutter = (req, res) => {
 
     const csvStream = format({ headers: fieldNames });
     const readable = new Readable();
-    readable._read = () => {};
+    readable._read = () => { };
     readable.push(null); // No row data; just headers
 
     res.setHeader('Content-Disposition', 'attachment; filename=application_upload_template.csv');
