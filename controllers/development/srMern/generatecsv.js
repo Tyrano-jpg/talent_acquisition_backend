@@ -18,7 +18,7 @@ export const downloadCSVSrMern = async (req, res) => {
       'current_org',
       'key_skill',
       'notice_period',
-      'relevant_experience',
+      'relevant_experience (eg: 3.4)',
       'current_ctc (eg: 420000)',
       'expected_ctc (eg: 420000)',
       'joining_preference',
@@ -28,8 +28,17 @@ export const downloadCSVSrMern = async (req, res) => {
       'stack',
     ];
 
-    // Add header row
-    worksheet.addRow(headers);
+    // Set up columns with width and no-wrap alignment
+    worksheet.columns = headers.map(header => ({
+      header,
+      width: 25,
+      style: { alignment: { wrapText: false } },
+    }));
+
+    // Bold and wrap off for header
+    const headerRow = worksheet.getRow(1);
+    headerRow.font = { bold: true };
+    headerRow.alignment = { wrapText: false };
 
     // Stack dropdown options
     const stackOptions = [
@@ -39,20 +48,21 @@ export const downloadCSVSrMern = async (req, res) => {
       'digital_marketing', 'hr', 'bd', 'ba',
     ];
 
-    // Column index for 'stack'
     const stackCol = headers.indexOf('stack') + 1;
+    worksheet.getCell(1, stackCol).note =
+      'Select a value from the dropdown in row 2 and drag down to apply it to more rows.';
 
-    // Add data validation to rows 2–100 for stack column
-    for (let i = 2; i <= 100; i++) {
-      worksheet.getCell(i, stackCol).dataValidation = {
-        type: 'list',
-        allowBlank: true,
-        formulae: [`"${stackOptions.join(',')}"`],
-        showErrorMessage: true,
-        errorTitle: 'Invalid Stack',
-        error: 'Choose a valid stack from the dropdown.',
-      };
-    }
+    // Apply dropdown validation for future rows (rows 2 to 100 for example)
+    worksheet.getCell(2, stackCol).dataValidation = {
+      type: 'list',
+      allowBlank: true,
+      formulae: [`"${stackOptions.join(',')}"`],
+      showErrorMessage: true,
+      errorTitle: 'Invalid Stack',
+      error: 'Choose a valid stack from the dropdown.',
+    };
+
+    worksheet.getCell(2, stackCol).note = 'Drag this cell down to apply dropdown to more rows.';
 
     // Set response headers
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

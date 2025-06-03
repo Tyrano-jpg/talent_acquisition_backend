@@ -20,8 +20,16 @@ export const srmern_bulkUpload = async (req, res) => {
         const cleaned = {};
         for (const key in row) {
           const cleanKey = key.trim().replace(/\uFEFF/g, "");
-          const value = row[key];
-          cleaned[cleanKey] = typeof value === "string" ? value.trim() : value;
+          let value = row[key];
+
+          if (cleanKey === 'key_skill' && typeof value === "string") {
+            cleaned[cleanKey] = value
+              .split(",")
+              .map(skill => skill.trim())
+              .filter(Boolean); // Remove empty strings
+          } else {
+            cleaned[cleanKey] = typeof value === "string" ? value.trim() : value;
+          }
         }
         return cleaned;
       })
@@ -34,7 +42,7 @@ export const srmern_bulkUpload = async (req, res) => {
       });
 
     // ✅ Required fields
-    const requiredFields = ["email_id", "stack"];
+    const requiredFields = ["email_id", "stack", 'full_name'];
     const missingFields = [];
     const duplicateEntries = [];
 
