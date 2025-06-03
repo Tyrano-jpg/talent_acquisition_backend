@@ -22,7 +22,7 @@ export const uiux_bulkUpload = async (req, res) => {
           const cleanKey = key.trim().replace(/\uFEFF/g, "");
           let value = row[key];
 
-          if (cleanKey === "key_skill" && typeof value === "string") {
+          if (cleanKey === 'key_skill' && typeof value === "string") {
             cleaned[cleanKey] = value
               .split(",")
               .map(skill => skill.trim())
@@ -42,7 +42,7 @@ export const uiux_bulkUpload = async (req, res) => {
       });
 
     // ✅ Required fields
-    const requiredFields = ["email_id", "stack"];
+    const requiredFields = ["email_id", "stack", 'full_name'];
     const missingFields = [];
     const duplicateEntries = [];
 
