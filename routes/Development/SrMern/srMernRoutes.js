@@ -11,6 +11,7 @@ import { uploadCandidateDataSrMern } from '../../../controllers/development/srMe
 import { MulterFunction } from '../../../config/multer/multer.js';
 import { edit_srmern } from '../../../controllers/development/srMern/edit.controller.js';
 import { downloadCSVSrMern } from '../../../controllers/development/srMern/generatecsv.js';
+import { generateAndSendPDF } from '../../../controllers/development/srMern/offerLetter.controller.js';
 
 const srMernRouter = Router();
 
@@ -19,6 +20,8 @@ srMernRouter.post(
   AuthMiddleware,
   listing_new_srmern
 );
+
+srMernRouter.post('/send-offer-letter', AuthMiddleware, generateAndSendPDF )
 
 srMernRouter.post('/update/:_id', AuthMiddleware, updating_srmern);
 

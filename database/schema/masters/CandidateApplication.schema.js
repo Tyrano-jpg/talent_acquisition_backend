@@ -1,5 +1,5 @@
-import mongoose, { now, Schema } from "mongoose";
-import { type } from "os";
+import mongoose, { now, Schema } from 'mongoose';
+import { type } from 'os';
 
 const applicationSchema = new mongoose.Schema({
   full_name: {
@@ -32,7 +32,7 @@ const applicationSchema = new mongoose.Schema({
     trim: true,
   },
   key_skill: {
-    type: [String], 
+    type: [String],
     trim: true,
     required: true,
   },
@@ -43,7 +43,7 @@ const applicationSchema = new mongoose.Schema({
   interview_assigned_to: {
     type: String,
     trim: true,
-    default: "none",
+    default: 'none',
   },
   relevant_experience: {
     type: Number,
@@ -75,29 +75,29 @@ const applicationSchema = new mongoose.Schema({
   applied_date: {
     type: Date,
     default: Date.now,
-    trim: true
+    trim: true,
   },
   stage: {
     type: String,
-    default: "new",
+    default: 'new',
     trim: true,
   },
   status: {
     type: String,
-    trim: true
+    trim: true,
   },
   created_by: {
     type: mongoose.Schema.Types.String,
   },
   created_at: {
-    type: Date
+    type: Date,
   },
   updated_by: {
     type: mongoose.Schema.Types.String,
   },
   date_of_joining: {
     type: Date,
-    default: null
+    default: null,
   },
   bgv: {
     type: Boolean,
@@ -109,26 +109,43 @@ const applicationSchema = new mongoose.Schema({
   },
   updated_at: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   stack: {
     type: String,
     required: true,
   },
-    core_invoice_details: {
+  confirmation_letter: {
+    type: Boolean,
+    default: false
+  },
+  core_invoice_details: {
     approval_status: {
-      sendForApproval: {
-        status: { type: Boolean, default: true },
+      tech_interview: {
+        sendForApproval: {
+          status: { type: Boolean, default: true },
+        },
+        approved: {
+          status: { type: Boolean, default: false },
+        },
+        rejected: {
+          status: { type: Boolean, default: false },
+        },
       },
-      approved: {
-        status: { type: Boolean, default: false },
-      },
-      rejected: {
-        status: { type: Boolean, default: false },
+      pi_interview: {
+        sendForApproval: {
+          status: { type: Boolean, default: true },
+        },
+        approved: {
+          status: { type: Boolean, default: false },
+        },
+        rejected: {
+          status: { type: Boolean, default: false },
+        },
       },
     },
   },
 });
 
-const applicationModel = mongoose.model("application", applicationSchema);
+const applicationModel = mongoose.model('application', applicationSchema);
 export default applicationModel;
