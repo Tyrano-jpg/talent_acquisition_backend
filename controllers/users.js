@@ -359,9 +359,9 @@ export const AdminChangePassword = catchAsync(async (req, res) => {
 });
 
 export const RoleNameList = catchAsync(async (req, res) => {
-  const { dept_name } = req.body;
+  
   const role = await RolesModel.find(
-    { dept_name: dept_name, status: true },
+    { status: true },
     '_id role_name'
   )
     .sort({ role_name: 1 })
@@ -376,16 +376,15 @@ export const RoleNameList = catchAsync(async (req, res) => {
   return res.status(200).json({
     result: role,
     status: true,
-    message: 'List Role name for department.',
+    message: 'List Role name.',
   });
 });
 
 export const ListApproverUser = catchAsync(async (req, res) => {
-  const { dept_name } = req.body;
   const user = req.userDetails;
 
   const approverUser = await UserModel.find(
-    { dept_name: dept_name, user_type: 'ADMIN' },
+    { user_type: 'ADMIN' },
     '_id user_name'
   )
     .sort({ user_name: 1 })

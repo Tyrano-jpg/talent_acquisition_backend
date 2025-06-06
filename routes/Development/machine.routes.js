@@ -35,10 +35,10 @@ router.get(
   AuthMiddleware,
   DropdownMachineNameMaster
 );
-router.get(
-  '/dropdown-machine-master-by-deptartment',
-  AuthMiddleware,
-  DropdownMachineNameMasterById
-);
+// router.get(
+//   '/dropdown-machine-master-by-deptartment',
+//   AuthMiddleware,
+//   DropdownMachineNameMasterById
+// );
 
 export default router;
