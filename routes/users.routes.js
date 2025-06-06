@@ -18,12 +18,12 @@ router.post(
   RolesPermissions('user', 'create'),
   AddUser
 );
-// router.post(
-//   '/update-user',
-//   AuthMiddleware,
-//   RolesPermissions('user', 'edit'),
-//   UpdateUser
-// );
+router.post(
+  '/update-user',
+  AuthMiddleware,
+  RolesPermissions('user', 'edit'),
+  UpdateUser
+);
 router.post(
   '/list-user',
   AuthMiddleware,
@@ -36,17 +36,17 @@ router.post(
 //   RolesPermissions('user', 'edit'),
 //   DeleteUser
 // );
-// router.patch(
-//   '/admin-change-password',
-//   AuthMiddleware,
-//   RolesPermissions('user', 'edit'),
-//   AdminChangePassword
-// );
+router.patch(
+  '/admin-change-password',
+  AuthMiddleware,
+  RolesPermissions('user', 'edit'),
+  AdminChangePassword
+);
 
 // router.get("/user-logs",AuthMiddleware, ListUserLogs);
 
 // without permission
 // router.post('/list-approver-user', AuthMiddleware, ListApproverUser);
-// router.post('/role-list-for-dept', AuthMiddleware, RoleNameList);
+router.post('/role-list-for-dept', AuthMiddleware, RoleNameList);
 
 export default router;

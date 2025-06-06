@@ -17,16 +17,16 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'User Type is required.'],
     indexedDB: true,
   },
-  dept_name: {
-    type: String,
-    required: [true, 'Department Name is required.'],
-    indexedDB: true,
-  },
-  dept_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, 'Department ID is Required'],
-    ref: 'department',
-  },
+  // dept_name: {
+  //   type: String,
+  //   required: [true, 'Department Name is required.'],
+  //   indexedDB: true,
+  // },
+  // dept_id: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: [true, 'Department ID is Required'],
+  //   ref: 'department',
+  // },
   approver_user_name: {
     type: String,
     required: [true, 'Approver User Name is required.'],
