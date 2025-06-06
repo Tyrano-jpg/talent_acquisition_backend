@@ -10,16 +10,16 @@ const RoleSchema = new mongoose.Schema({
     trim: true,
     uppercase: true,
   },
-  dept_name: {
-    type: String,
-    required: [true, 'Department name is required.'],
-    trim: true,
-  },
-  dept_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, 'Department is Required'],
-    ref: 'department',
-  },
+  // dept_name: {
+  //   type: String,
+  //   required: [true, 'Department name is required.'],
+  //   trim: true,
+  // },
+  // dept_id: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: [true, 'Department is Required'],
+  //   ref: 'department',
+  // },
   // permissions: {
   //   user_create: { type: Boolean, default: false },
   //   user_edit: { type: Boolean, default: false },
