@@ -21,7 +21,7 @@ srMernRouter.post(
   listing_new_srmern
 );
 
-srMernRouter.post('/send-offer-letter', AuthMiddleware, generateAndSendPDF )
+srMernRouter.post('/send-letter', AuthMiddleware, generateAndSendPDF )
 
 srMernRouter.post('/update/:_id', AuthMiddleware, updating_srmern);
 
