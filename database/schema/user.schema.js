@@ -27,15 +27,15 @@ const UserSchema = new mongoose.Schema({
   //   required: [true, 'Department ID is Required'],
   //   ref: 'department',
   // },
-  approver_user_name: {
-    type: String,
-    required: [true, 'Approver User Name is required.'],
-    indexedDB: true,
-  },
-  approver_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    default: null,
-  },
+  // approver_user_name: {
+  //   type: String,
+  //   required: [true, 'Approver User Name is required.'],
+  //   indexedDB: true,
+  // },
+  // approver_id: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   default: null,
+  // },
   role_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: [true, 'Role is Required'],
