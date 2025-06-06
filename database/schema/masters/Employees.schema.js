@@ -1,7 +1,7 @@
 import mongoose, { now, Schema } from 'mongoose';
 import { type } from 'os';
 
-const applicationSchema = new mongoose.Schema({
+const employeesSchema = new mongoose.Schema({
   full_name: {
     type: String,
     trim: true,
@@ -135,5 +135,5 @@ const applicationSchema = new mongoose.Schema({
   },
 });
 
-const applicationModel = mongoose.model('application', applicationSchema);
-export default applicationModel;
+const employeesModel = mongoose.model('employees', employeesSchema);
+export default employeesModel;

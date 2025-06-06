@@ -1,91 +1,327 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8" />
   <title>Offer Letter</title>
+  <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
   <style>
+    @page {
+      size: A4;
+      margin: 130px 50px 100px 50px;
+
+      @top-center {
+        content: element(header);
+      }
+
+      @bottom-center {
+        content: element(footer);
+      }
+    }
+
+    /* Register elements for @page margin boxes */
+    .pagedjs_header {
+      position: running(header);
+    }
+
+    .pagedjs_footer {
+      position: running(footer);
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      position: relative;
+      min-height: 100vh;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50%; /* or cover, or any size you want */
+    }
+
+    /* Watermark container and image */
+    .watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: 0;
+      width: 50%;
+      height: auto;
+    }
+    .watermark img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Header (top strip + logo) */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      background: white;
+      border-bottom: 1px solid #ddd;
+      height: 100px;
+      max-width: 700px;
+      margin: 8px auto 0; /* to sit below the top strip */
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-logo img {
+      max-height: 50px;
+    }
+
+    .header-location {
+      font-size: 14px;
+      color: #555;
+      white-space: nowrap;
+      max-width: 60%;
+    }
+
+    /* The color strip at top and bottom */
+    .color-strip {
+      height: 8px;
+      background: linear-gradient(90deg, #07B9CE 0%, #3969E7 50%, #7D2AE7 100%);
       margin: 0;
       padding: 0;
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 9999;
     }
+
+    /* Position the top strip at the very top */
+    .pagedjs_header .color-strip {
+      top: 0;
+    }
+
+    /* Position the bottom strip at the very bottom */
+    .pagedjs_footer .color-strip {
+      bottom: 0;
+    }
+
+    /* Footer strip container no longer needs width 100% */
+    .footer-strip-container {
+      /* no positioning needed here */
+    }
+
+    /* Main content container */
     .container {
+      background-color: transparent; /* no background color */
       max-width: 700px;
-      margin: 30px auto;
-      background: #fff;
-      border-radius: 8px;
-      padding: 30px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+      padding: 30px 40px;
+      z-index: 1;
+      position: relative;
     }
-    h1 {
+
+
+    h1, h2, h3, h4 {
       color: #2c3e50;
       text-align: center;
       margin-bottom: 20px;
     }
+
     p {
-      color: #555;
-      line-height: 1.5;
+      line-height: 1.6;
+      font-size: 15px;
+      margin-top: 0;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 20px 0;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
       font-size: 14px;
     }
-    table, th, td {
-      border: 1px solid #ddd;
-    }
-    th, td {
-      padding: 12px;
-      text-align: center;
-    }
+
     th {
-      background-color: #f5f5f5;
-      color: #333;
+      background-color: #f2f2f2;
     }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
+
+    ol {
+      padding-left: 20px;
+      margin-top: 0;
     }
-    .footer {
-      margin-top: 20px;
-      color: #777;
-      font-size: 13px;
-      text-align: center;
+
+    ol li {
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Offer Letter</h1>
-    <p>Dear {{full_name}},</p>
-    <p>We are pleased to offer you the position of <strong>{{stack}}</strong> at our company.</p>
-    <p>Your joining date is: <strong>{{date_of_joining}}</strong></p>
+  <!-- Watermark image -->
+  <div class="watermark">
+    <img src="{{watermark}}" alt="Watermark" />
+  </div>
 
-    <h2 style="margin-top: 30px; color: #2c3e50;">CTC Details</h2>
-    <table>
-      <tr>
-        <th>Field</th>
-        <th>Value</th>
-      </tr>
-      <tr>
-        <td>Expected CTC</td>
-        <td>{{expected_ctc}}</td>
-      </tr>
-      <tr>
-        <td>Current CTC</td>
-        <td>{{current_ctc}}</td>
-      </tr>
-      <tr>
-        <td>Calculation<br/>(Expected CTC / 100) * 2 - Current CTC</td>
-        <td>{{calculated_value}}</td>
-      </tr>
-    </table>
-
-    <p>We look forward to having you on board!</p>
-    <p>Regards,<br/>HR Team</p>
-    <div class="footer">
-      &copy; {{year}} Company Name. All rights reserved.
+  <!-- Running header with top strip -->
+  <div class="pagedjs_header">
+    <div class="color-strip"></div>
+    <div class="header">
+      <div class="header-logo">
+        <!-- Replace {{logo}} with actual logo path or URL -->
+        <img src="{{logo}}" alt="Logo" />
+      </div>
+      <div class="header-location">
+        <p><strong>Location:</strong> {{location}}</p>
+      </div>
     </div>
   </div>
-</body>
+
+  <!-- Running footer with bottom strip -->
+  <div class="pagedjs_footer">
+    <div class="footer-strip-container">
+      <div class="color-strip"></div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="container">
+
+      <h3 class="appointment-text">Appointment Letter</h3>
+
+      <p><strong>Dear {{full_name}},</strong></p>
+      <p><strong>Email id:</strong> {{email_id}},</p>
+      <p><strong>Contact:</strong> {{contact_no}},</p>
+
+      <div class="subject">
+        <p>
+          <strong>Subject:</strong>
+          <span style="text-decoration: underline"
+            >Appointment Letter for the position of {{stack}}</span
+          >
+        </p>
+      </div>
+
+      <p><strong>Dear {{full_name}},</strong></p>
+
+      <p style="text-indent: 40px; margin-top: 0">
+        With reference to your application and the interview you had with us, we
+        have pleasure in appointing you as “{{stack}}” with all cost to company
+        included (CTC) package of Rs. 96,000 /- (Ninety Six Thousand Rupees
+        Only) per annum with effect from 03/08/2024 on following terms and
+        conditions subject to your acceptance of the same. (CTC breakup is
+        annexed as Annexure-A to this letter)
+      </p>
+
+      <p style="">
+        <ol>
+            <li>You will be on probation for six months from the date of joining the
+        Company. Your confirmation is subject to your performance during
+        probation period. If your performance is not found up to the standard,
+        then your probation period may either be extended further or your
+        services shall be terminated. Please note that you will be deemed to be
+        under probation unless & until you are issued confirmation letter in
+        writing.</li>
+        <li>In case an employee is absconding, company shall be entitled
+        to deduct the amount equivalent to the notice period of said employee
+        from his full and final settlement and company may seek legal action
+        against the employee for not serving the notice period and to recover
+        the damages done during his/her employment for the project. </li>
+        <li>You shall
+        be eligible for such number of leaves as per leave policy of the
+        Company, which shall be provided to you separately. 4. If eligible you
+        will be covered under the Employees State Insurance Act & Employees
+        Provident Fund Act. You will be entitled to gratuity, Provident Fund and
+        other benefits as per law.</li>
+        <li>If eligible you will be covered under the Employees State Insurance Act & Employees Provident Fund Act. You will be entitled to gratuity, Provident Fund and other benefits as per law.</li>
+        <li>You shall be required to submit necessary documents & declarations within 30 days of Joining (Tax benefit Planning) followed by supporting documents of execution by 15th March, every year to the Company in accordance with Income Tax Act, 1961 failing which Company shall deduct applicable TDS from the Salary accordingly for filing with Income Tax Department, which shall not be reversible from Company’s end.</li>
+        <li>You will report on duty timely and regularly as per the instructions of the management. You will abide by the discipline and general management of the work place as per Company’s policy and Management’s instructions from time to time. You will also initiate appropriate disciplinary actions for any violations by your subordinates against Company’s policy and Management’s instructions.  In the case of exigency, you may be required to work beyond normal working hours including on Holidays.</li>
+        <li>During your employment with us, you shall be subject to the company’s rules and regulations and Code of Conduct and Ethics (annexed as Annexure-B of this letter) in force which may get amended from time to time at management’s discretion irrespective of whether these rules and regulations and any changes therein are notified to you or not.</li>
+        <li>Every employee is responsible to work for 9 hours in a day i.e. from 10.00 am to 7.00 pm including break for 1 hour (i.e. 45 mins lunch break and 15 mins refreshment break). You have to complete 9 working hours daily as per the time given to you including your lunch or any other break. Any changes in the schedule or time shall be communicated to the respected authority.</li>
+        <li>No compensation of time will be allowed until and unless approved by the management. Employees are not allowed to compensate time in order to cover short breaks during their working hours without any prior permission.</li>
+        <li>You will take initiative and keen interest in development of your subordinates, work culture and enhancement of the productivity levels. </li>
+        <li>You will be fully responsible for handling and maintenance of equipment, tools, records, assets, stocks, documents, ledgers, software and office and other furniture. </li>
+        <li>You will also perform all and any other incidental work if and when required based on business contingency. </li>
+        <li>You will adhere to regularity and punctuality and also enforce same. </li>
+        <li>Work from home is not allowed without management’s approval.</li>
+        <li>You shall not reveal any information about the company and its customers, clients, vendors etc. to any person, firm, corporation, or entity. Should you reveal any such information, your employment may be terminated with immediate effect and the company may pursue legal remedies against you as it may deem fit.</li>
+        <li>Since you will be acquiring and getting information of Company, its clients and vendor details, data, analytics and vital business and strategic information including intellectual property of the Company and its clients and its business plans, by making endorsement below, you indemnify Company for non-disclosure of all such information. Any intentional unauthorized disclosure of protected, confidential details and intellectual property of the Company and its clients shall amount to breach of trust. In such event, suitable actions will be initiated for protecting Company’s interests and intellectual property rights.</li>
+        <li>You are liable to be transferred to any other Section, Department of the same establishment or may get transferred to any other establishment (Existing or which may are liable to be transferred to any other Section, Department of the same establishment or may get transferred to any other establishment (Existing or which may be setup in future) under the same management anywhere in the country with or without any extra remuneration or benefits as per company policy.</li>
+        <li>The member shall not undertake any activity with an organisation / person which directly or indirectly competes with the business of the firm during the term and for a period of 5 years after the termination of your employment. Competitive activity and/or competition shall mean and include, but not be limited to, being associated with any business/and or activity which is competitive to the business interest of the firm, either as an owner, shareholder, holder of business interest, employee, consultant or advisor. You shall also not join either as an owner, holder of business interest, employee, consultant or advisor which are either Supplier or Customer of the Company.</li>
+        <li>Your refusal to join duty at the transferred place will be deemed as break in service and this will call for initiating appropriate disciplinary actions. You will not be entitled to any claim of salary or wages or allowances or benefits due to your absence.</li>
+        <li>On your acceptance of your resignation or termination, as the case may be, from company’s services, your full and final accounts will be settled on your furnishing a certificate from the HR Department of the company that you do not owe any amount to the Company or any undertaking given by the company at your request and you have handed over the status of all 
+        Property, data, passwords, documents, Plans, tools, accounts, ledgers, assets etc. in your custody including utility kit, samples, stationary, Demos and equipment entrusted to you by the Company.
+        </li>
+        <li>Your continuance in service of the company is subject to your remaining physically and mentally fit. As and when required by the management, you will submit yourself to medical examination at the cost of the Company by a physician appointed by the Company for the purpose. In the event of your being declared mentally, medically or physically unfit to attend to the work or discharge the duties as required by the Company, your services shall be terminated immediately.</li>
+        <li>During the period of Probation, your services may be terminated by the management at its sole discretion on immediate basis. Post confirmation, your Services may be terminated by the management by giving an advance One months’ notice.</li>
+        <li>In case you wish to resign from the Company, you shall be liable to give an advance Two months’ notice to the Company or Two months’ salary in lieu of notice of any less days. In the event of the resignation submitted before 7th Day in any month, that particular month will be considered in the 2 months’ notice period. However if the resignation is submitted after the 7th Day in any month, you will have to serve the existing month and next 2 months.</li>
+        <li>Any unintimated leave / non-reporting to duty for 3 days or more shall be treated as termination of services from your side, unless Company on sufficient cause being shown considers your application for non-termination in writing, which shall be considered as termination without intimation and liable for 2 months’ Salary in lieu of notice of 2 months as mentioned in the above-mentioned Clause.</li>
+        <li>Your services are also liable to be terminated immediately without any advance notice for suppression of information and for furnishing false information with a view to obtain employment.</li>
+        <li>Your services are liable to be terminated without notice if you are found indulging in any kind of propaganda, political activity, misbehaviours, intimidation, violence, wilfully damaging any property belonging to company, its clients or other employees and not observing company laid down discipline within the premises. </li>
+        <li>You shall submit a report of monthly performance (as per format provided by the management) mentioning the details of your performance and work done during the month to your assigned reporting Manager. Your salary shall not be processed until and unless monthly performance report is received by the Company on or before 1st of each succeeding Month to which the performance relates. Increment shall be done annually in the month of 
+        March every year which will be based on the individual performance and skills. The employee needs to complete at least 12 months of employment for increment.
+        </li>
+        <li>After your increment you have to stay for minimum 3 months (excluding notice period) in the Company.</li>
+        <li>You shall not be allowed to accept any directorship on the board or employment of any other company. Even for accepting directorships on the board of any other company, prior written approval from Management of the Company shall be required. Further a prior written approval shall also be required from the Company in case you wish to carry on a business, part time employment or providing consulting services of any nature. Violation of these conditions shall make you liable for necessary disciplinary action including but not limited to termination with immediate effect without any notice period and pay thereof.</li>
+        <li>On resignation, employee is requested to share their love and affection towards the Company in few words and experience on the online platform in order to spread positive environment among the existing as well as new employees / clients.</li>
+        <li>The company will correspond with you on the address given in title above. In case there will be any change in your address, you will intimate the Company in writing within 3 days from the date of such change. Any letter sent by the Company by Registered AD/Speed Post/Courier at the above address will be deemed as proper service.</li>
+        <li>You will be bound by all rules and regulations enforced by the management from time to time in relation to conduct, discipline, medical leave and holidays or on any matters relating to service conditions which will be deemed as rules, regulations and order in part of these terms of employment.</li>
+        <li>In the event of you be found under the influence of Alcohol, Drugs or in possession of such materials while on duty, your services shall get terminated immediately with initialization of other disciplinary & legal actions. </li>
+        <li>Disputes, if any, arising out of this Appointment letter shall be subject to the exclusive      jurisdiction of the Competent Court in Mumbai, to the exclusion of all other concurrent courts. </li>
+        </ol> 
+      </p>
+
+      <p>Please confirm the above terms having been correctly reproduced and being agreed upon by making your endorsement below.</p>
+
+      <p style="margin-bottom: -5px;"><strong>For Metaphi</strong></p>
+      <img style="height: 80px;" src="sign.png" alt="sign">
+      <p class="line"></p>
+
+      <p><strong>Authorized Signatory</strong></p>
+
+      <h4 style="text-decoration: underline;">ACCEPTANCE</h4>
+
+      <p style="font-weight: 200;">I confirm that the above terms and conditions are correct reproduction of what I have discussed and agreed upon with the management.</p>
+
+      <div style="font-weight: 500; display: flex; align-items: center;">
+    <strong>Signature:&nbsp;</strong>
+    <div style="height: 2px; background-color: black; width: 100px; margin-top: 13px;"></div>
+    </div>
+
+    <div style="font-weight: 500; display: flex; align-items: center; margin-top: 15px;">
+    <strong>Name:&nbsp;</strong>
+    <div style="margin-left: 31px; height: 2px; background-color: black; width: 100px; margin-top: 13px;"></div>
+    </div>
+
+    <div style="margin-top: 15px; font-weight: 500; display: flex; align-items: center;">
+    <strong>Date:&nbsp;</strong>
+    <div style="margin-left: 39px; height: 2px; background-color: black; width: 100px; margin-top: 13px;"></div>
+    </div>
+
+      <h2 style="margin-top: 30px; color: #2c3e50">CTC Details</h2>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>Expected CTC</td>
+          <td>{{expected_ctc}}</td>
+        </tr>
+        <tr>
+          <td>Current CTC</td>
+          <td>{{current_ctc}}</td>
+        </tr>
+        <tr>
+          <td>Calculation<br />(Expected CTC / 100) * 2 - Current CTC</td>
+          <td>{{calculated_value}}</td>
+        </tr>
+      </table>
+
+      <p>We look forward to having you on board!</p>
+      <p>Regards,<br />HR Team</p>
+
+      <div class="footer">
+        &copy; {{year}} Company Name. All rights reserved.
+      </div>
+    </div>
+  </body>
 </html>
