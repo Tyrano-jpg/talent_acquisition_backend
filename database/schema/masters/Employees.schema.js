@@ -95,6 +95,14 @@ const employeesSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  gender: {
+    type: String,
+    trim: true
+  },
+  position: {
+    type: String,
+    trim: true
+  },
   updated_at: {
     type: Date,
     default: Date.now,

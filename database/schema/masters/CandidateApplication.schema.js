@@ -45,9 +45,17 @@ const applicationSchema = new mongoose.Schema({
     type: Number,
     trim: true,
   },
+  offered_ctc: {
+    type: Number,
+    trim: true,
+  },
   expected_ctc: {
     type: Number,
     trim: true,
+  },
+  gender: {
+    type: String,
+    trim: true
   },
   source: {
     type: String,

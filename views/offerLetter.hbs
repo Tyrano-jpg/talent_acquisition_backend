@@ -1,208 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Offer Letter</title>
-  <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
-  <style>
-    @page {
-      size: A4;
-      margin: 130px 50px 100px 50px;
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <title>Offer Letter</title>
+    <script src='https://unpkg.com/pagedjs/dist/paged.polyfill.js'></script>
+    <style>
+      @page { size: A4; margin: 200px 50px 50px 50px; } html, body { margin: 0;
+      padding: 0; height: 100%; } body { position: relative; min-height: 100vh;
+      background-repeat: no-repeat; background-position: center center;
+      background-size: cover; } /* Full-page watermark image */ .watermark {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; opacity:
+      0.9; pointer-events: none; z-index: -1; } .watermark img { width: 100%;
+      height: 100%; object-fit: cover; display: block; } .container {
+      background-color: transparent; max-width: 700px; margin: 0 auto; padding:
+      30px 40px; z-index: 1; position: relative; } h1, h2, h3, h4 { color:
+      #2c3e50; text-align: center; margin-bottom: 20px; } p { line-height: 1.6;
+      font-size: 15px; margin-top: 0; } table { width: 100%; border-collapse:
+      collapse; margin-top: 15px; } th, td { border: 1px solid #ddd; padding:
+      8px; font-size: 14px; } th { background-color: #f2f2f2; } ol {
+      padding-left: 20px; margin-top: 0; } ol li { margin-bottom: 10px; }
+    </style>
 
-      @top-center {
-        content: element(header);
-      }
-
-      @bottom-center {
-        content: element(footer);
-      }
-    }
-
-    /* Register elements for @page margin boxes */
-    .pagedjs_header {
-      position: running(header);
-    }
-
-    .pagedjs_footer {
-      position: running(footer);
-    }
-
-    body {
-      position: relative;
-      min-height: 100vh;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 50%; /* or cover, or any size you want */
-    }
-
-    /* Watermark container and image */
-    .watermark {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0.1;
-      pointer-events: none;
-      z-index: 0;
-      width: 50%;
-      height: auto;
-    }
-    .watermark img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Header (top strip + logo) */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 40px;
-      background: white;
-      border-bottom: 1px solid #ddd;
-      height: 100px;
-      max-width: 700px;
-      margin: 8px auto 0; /* to sit below the top strip */
-      position: relative;
-      z-index: 1;
-    }
-
-    .header-logo img {
-      max-height: 50px;
-    }
-
-    .header-location {
-      font-size: 14px;
-      color: #555;
-      white-space: nowrap;
-      max-width: 60%;
-    }
-
-    /* The color strip at top and bottom */
-    .color-strip {
-      height: 8px;
-      background: linear-gradient(90deg, #07B9CE 0%, #3969E7 50%, #7D2AE7 100%);
-      margin: 0;
-      padding: 0;
-      position: fixed;
-      left: 0;
-      right: 0;
-      z-index: 9999;
-    }
-
-    /* Position the top strip at the very top */
-    .pagedjs_header .color-strip {
-      top: 0;
-    }
-
-    /* Position the bottom strip at the very bottom */
-    .pagedjs_footer .color-strip {
-      bottom: 0;
-    }
-
-    /* Footer strip container no longer needs width 100% */
-    .footer-strip-container {
-      /* no positioning needed here */
-    }
-
-    /* Main content container */
-    .container {
-      background-color: transparent; /* no background color */
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 30px 40px;
-      z-index: 1;
-      position: relative;
-    }
-
-
-    h1, h2, h3, h4 {
-      color: #2c3e50;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    p {
-      line-height: 1.6;
-      font-size: 15px;
-      margin-top: 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      font-size: 14px;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    ol {
-      padding-left: 20px;
-      margin-top: 0;
-    }
-
-    ol li {
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
-  <!-- Watermark image -->
-  <div class="watermark">
-    <img src="{{watermark}}" alt="Watermark" />
-  </div>
-
-  <!-- Running header with top strip -->
-  <div class="pagedjs_header">
-    <div class="color-strip"></div>
-    <div class="header">
-      <div class="header-logo">
-        <!-- Replace {{logo}} with actual logo path or URL -->
-        <img src="{{logo}}" alt="Logo" />
-      </div>
-      <div class="header-location">
-        <p><strong>Location:</strong> {{location}}</p>
-      </div>
+  </head>
+  <body>
+    <!-- Watermark image -->
+    <div class='watermark'>
+      <img src='{{watermark}}' alt='Watermark' />
     </div>
-  </div>
 
-  <!-- Running footer with bottom strip -->
-  <div class="pagedjs_footer">
-    <div class="footer-strip-container">
-      <div class="color-strip"></div>
-    </div>
-  </div>
+    <!-- Main content -->
+    <div class='container'>
 
-  <!-- Main content -->
-  <div class="container">
+      <h3 class='appointment-text'>Appointment Letter</h3>
 
-      <h3 class="appointment-text">Appointment Letter</h3>
-
-      <p><strong>Dear {{full_name}},</strong></p>
+      <p><strong>{{title}} {{full_name}},</strong></p>
       <p><strong>Email id:</strong> {{email_id}},</p>
       <p><strong>Contact:</strong> {{contact_no}},</p>
 
-      <div class="subject">
+      <div class='subject'>
         <p>
           <strong>Subject:</strong>
-          <span style="text-decoration: underline"
-            >Appointment Letter for the position of {{stack}}</span
-          >
+          <span style='text-decoration: underline'>Appointment Letter for the
+            position of
+            {{stack}}</span>
         </p>
       </div>
 
       <p><strong>Dear {{full_name}},</strong></p>
 
-      <p style="text-indent: 40px; margin-top: 0">
+      <p style='text-indent: 40px; margin-top: 0'>
         With reference to your application and the interview you had with us, we
         have pleasure in appointing you as “{{stack}}” with all cost to company
         included (CTC) package of Rs. 96,000 /- (Ninety Six Thousand Rupees
@@ -211,117 +56,586 @@
         annexed as Annexure-A to this letter)
       </p>
 
-      <p style="">
+      <p style=''>
         <ol>
-            <li>You will be on probation for six months from the date of joining the
-        Company. Your confirmation is subject to your performance during
-        probation period. If your performance is not found up to the standard,
-        then your probation period may either be extended further or your
-        services shall be terminated. Please note that you will be deemed to be
-        under probation unless & until you are issued confirmation letter in
-        writing.</li>
-        <li>In case an employee is absconding, company shall be entitled
-        to deduct the amount equivalent to the notice period of said employee
-        from his full and final settlement and company may seek legal action
-        against the employee for not serving the notice period and to recover
-        the damages done during his/her employment for the project. </li>
-        <li>You shall
-        be eligible for such number of leaves as per leave policy of the
-        Company, which shall be provided to you separately. 4. If eligible you
-        will be covered under the Employees State Insurance Act & Employees
-        Provident Fund Act. You will be entitled to gratuity, Provident Fund and
-        other benefits as per law.</li>
-        <li>If eligible you will be covered under the Employees State Insurance Act & Employees Provident Fund Act. You will be entitled to gratuity, Provident Fund and other benefits as per law.</li>
-        <li>You shall be required to submit necessary documents & declarations within 30 days of Joining (Tax benefit Planning) followed by supporting documents of execution by 15th March, every year to the Company in accordance with Income Tax Act, 1961 failing which Company shall deduct applicable TDS from the Salary accordingly for filing with Income Tax Department, which shall not be reversible from Company’s end.</li>
-        <li>You will report on duty timely and regularly as per the instructions of the management. You will abide by the discipline and general management of the work place as per Company’s policy and Management’s instructions from time to time. You will also initiate appropriate disciplinary actions for any violations by your subordinates against Company’s policy and Management’s instructions.  In the case of exigency, you may be required to work beyond normal working hours including on Holidays.</li>
-        <li>During your employment with us, you shall be subject to the company’s rules and regulations and Code of Conduct and Ethics (annexed as Annexure-B of this letter) in force which may get amended from time to time at management’s discretion irrespective of whether these rules and regulations and any changes therein are notified to you or not.</li>
-        <li>Every employee is responsible to work for 9 hours in a day i.e. from 10.00 am to 7.00 pm including break for 1 hour (i.e. 45 mins lunch break and 15 mins refreshment break). You have to complete 9 working hours daily as per the time given to you including your lunch or any other break. Any changes in the schedule or time shall be communicated to the respected authority.</li>
-        <li>No compensation of time will be allowed until and unless approved by the management. Employees are not allowed to compensate time in order to cover short breaks during their working hours without any prior permission.</li>
-        <li>You will take initiative and keen interest in development of your subordinates, work culture and enhancement of the productivity levels. </li>
-        <li>You will be fully responsible for handling and maintenance of equipment, tools, records, assets, stocks, documents, ledgers, software and office and other furniture. </li>
-        <li>You will also perform all and any other incidental work if and when required based on business contingency. </li>
-        <li>You will adhere to regularity and punctuality and also enforce same. </li>
-        <li>Work from home is not allowed without management’s approval.</li>
-        <li>You shall not reveal any information about the company and its customers, clients, vendors etc. to any person, firm, corporation, or entity. Should you reveal any such information, your employment may be terminated with immediate effect and the company may pursue legal remedies against you as it may deem fit.</li>
-        <li>Since you will be acquiring and getting information of Company, its clients and vendor details, data, analytics and vital business and strategic information including intellectual property of the Company and its clients and its business plans, by making endorsement below, you indemnify Company for non-disclosure of all such information. Any intentional unauthorized disclosure of protected, confidential details and intellectual property of the Company and its clients shall amount to breach of trust. In such event, suitable actions will be initiated for protecting Company’s interests and intellectual property rights.</li>
-        <li>You are liable to be transferred to any other Section, Department of the same establishment or may get transferred to any other establishment (Existing or which may are liable to be transferred to any other Section, Department of the same establishment or may get transferred to any other establishment (Existing or which may be setup in future) under the same management anywhere in the country with or without any extra remuneration or benefits as per company policy.</li>
-        <li>The member shall not undertake any activity with an organisation / person which directly or indirectly competes with the business of the firm during the term and for a period of 5 years after the termination of your employment. Competitive activity and/or competition shall mean and include, but not be limited to, being associated with any business/and or activity which is competitive to the business interest of the firm, either as an owner, shareholder, holder of business interest, employee, consultant or advisor. You shall also not join either as an owner, holder of business interest, employee, consultant or advisor which are either Supplier or Customer of the Company.</li>
-        <li>Your refusal to join duty at the transferred place will be deemed as break in service and this will call for initiating appropriate disciplinary actions. You will not be entitled to any claim of salary or wages or allowances or benefits due to your absence.</li>
-        <li>On your acceptance of your resignation or termination, as the case may be, from company’s services, your full and final accounts will be settled on your furnishing a certificate from the HR Department of the company that you do not owe any amount to the Company or any undertaking given by the company at your request and you have handed over the status of all 
-        Property, data, passwords, documents, Plans, tools, accounts, ledgers, assets etc. in your custody including utility kit, samples, stationary, Demos and equipment entrusted to you by the Company.
-        </li>
-        <li>Your continuance in service of the company is subject to your remaining physically and mentally fit. As and when required by the management, you will submit yourself to medical examination at the cost of the Company by a physician appointed by the Company for the purpose. In the event of your being declared mentally, medically or physically unfit to attend to the work or discharge the duties as required by the Company, your services shall be terminated immediately.</li>
-        <li>During the period of Probation, your services may be terminated by the management at its sole discretion on immediate basis. Post confirmation, your Services may be terminated by the management by giving an advance One months’ notice.</li>
-        <li>In case you wish to resign from the Company, you shall be liable to give an advance Two months’ notice to the Company or Two months’ salary in lieu of notice of any less days. In the event of the resignation submitted before 7th Day in any month, that particular month will be considered in the 2 months’ notice period. However if the resignation is submitted after the 7th Day in any month, you will have to serve the existing month and next 2 months.</li>
-        <li>Any unintimated leave / non-reporting to duty for 3 days or more shall be treated as termination of services from your side, unless Company on sufficient cause being shown considers your application for non-termination in writing, which shall be considered as termination without intimation and liable for 2 months’ Salary in lieu of notice of 2 months as mentioned in the above-mentioned Clause.</li>
-        <li>Your services are also liable to be terminated immediately without any advance notice for suppression of information and for furnishing false information with a view to obtain employment.</li>
-        <li>Your services are liable to be terminated without notice if you are found indulging in any kind of propaganda, political activity, misbehaviours, intimidation, violence, wilfully damaging any property belonging to company, its clients or other employees and not observing company laid down discipline within the premises. </li>
-        <li>You shall submit a report of monthly performance (as per format provided by the management) mentioning the details of your performance and work done during the month to your assigned reporting Manager. Your salary shall not be processed until and unless monthly performance report is received by the Company on or before 1st of each succeeding Month to which the performance relates. Increment shall be done annually in the month of 
-        March every year which will be based on the individual performance and skills. The employee needs to complete at least 12 months of employment for increment.
-        </li>
-        <li>After your increment you have to stay for minimum 3 months (excluding notice period) in the Company.</li>
-        <li>You shall not be allowed to accept any directorship on the board or employment of any other company. Even for accepting directorships on the board of any other company, prior written approval from Management of the Company shall be required. Further a prior written approval shall also be required from the Company in case you wish to carry on a business, part time employment or providing consulting services of any nature. Violation of these conditions shall make you liable for necessary disciplinary action including but not limited to termination with immediate effect without any notice period and pay thereof.</li>
-        <li>On resignation, employee is requested to share their love and affection towards the Company in few words and experience on the online platform in order to spread positive environment among the existing as well as new employees / clients.</li>
-        <li>The company will correspond with you on the address given in title above. In case there will be any change in your address, you will intimate the Company in writing within 3 days from the date of such change. Any letter sent by the Company by Registered AD/Speed Post/Courier at the above address will be deemed as proper service.</li>
-        <li>You will be bound by all rules and regulations enforced by the management from time to time in relation to conduct, discipline, medical leave and holidays or on any matters relating to service conditions which will be deemed as rules, regulations and order in part of these terms of employment.</li>
-        <li>In the event of you be found under the influence of Alcohol, Drugs or in possession of such materials while on duty, your services shall get terminated immediately with initialization of other disciplinary & legal actions. </li>
-        <li>Disputes, if any, arising out of this Appointment letter shall be subject to the exclusive      jurisdiction of the Competent Court in Mumbai, to the exclusion of all other concurrent courts. </li>
-        </ol> 
+          <li>You will be on probation for six months from the date of joining
+            the Company. Your confirmation is subject to your performance during
+            probation period. If your performance is not found up to the
+            standard, then your probation period may either be extended further
+            or your services shall be terminated. Please note that you will be
+            deemed to be under probation unless & until you are issued
+            confirmation letter in writing.</li>
+          <li>In case an employee is absconding, company shall be entitled to
+            deduct the amount equivalent to the notice period of said employee
+            from his full and final settlement and company may seek legal action
+            against the employee for not serving the notice period and to
+            recover the damages done during his/her employment for the project.
+          </li>
+          <li>You shall be eligible for such number of leaves as per leave
+            policy of the Company, which shall be provided to you separately. 4.
+            If eligible you will be covered under the Employees State Insurance
+            Act & Employees Provident Fund Act. You will be entitled to
+            gratuity, Provident Fund and other benefits as per law.</li>
+          <li>If eligible you will be covered under the Employees State
+            Insurance Act & Employees Provident Fund Act. You will be entitled
+            to gratuity, Provident Fund and other benefits as per law.</li>
+          <li>You shall be required to submit necessary documents & declarations
+            within 30 days of Joining (Tax benefit Planning) followed by
+            supporting documents of execution by 15th March, every year to the
+            Company in accordance with Income Tax Act, 1961 failing which
+            Company shall deduct applicable TDS from the Salary accordingly for
+            filing with Income Tax Department, which shall not be reversible
+            from Company’s end.</li>
+          <li>You will report on duty timely and regularly as per the
+            instructions of the management. You will abide by the discipline and
+            general management of the work place as per Company’s policy and
+            Management’s instructions from time to time. You will also initiate
+            appropriate disciplinary actions for any violations by your
+            subordinates against Company’s policy and Management’s instructions.
+            In the case of exigency, you may be required to work beyond normal
+            working hours including on Holidays.</li>
+          <li>During your employment with us, you shall be subject to the
+            company’s rules and regulations and Code of Conduct and Ethics
+            (annexed as Annexure-B of this letter) in force which may get
+            amended from time to time at management’s discretion irrespective of
+            whether these rules and regulations and any changes therein are
+            notified to you or not.</li>
+          <li>Every employee is responsible to work for 9 hours in a day i.e.
+            from 10.00 am to 7.00 pm including break for 1 hour (i.e. 45 mins
+            lunch break and 15 mins refreshment break). You have to complete 9
+            working hours daily as per the time given to you including your
+            lunch or any other break. Any changes in the schedule or time shall
+            be communicated to the respected authority.</li>
+          <li>No compensation of time will be allowed until and unless approved
+            by the management. Employees are not allowed to compensate time in
+            order to cover short breaks during their working hours without any
+            prior permission.</li>
+          <li>You will take initiative and keen interest in development of your
+            subordinates, work culture and enhancement of the productivity
+            levels.
+          </li>
+          <li>You will be fully responsible for handling and maintenance of
+            equipment, tools, records, assets, stocks, documents, ledgers,
+            software and office and other furniture.
+          </li>
+          <li>You will also perform all and any other incidental work if and
+            when required based on business contingency.
+          </li>
+          <li>You will adhere to regularity and punctuality and also enforce
+            same.
+          </li>
+          <li>Work from home is not allowed without management’s approval.</li>
+          <li>You shall not reveal any information about the company and its
+            customers, clients, vendors etc. to any person, firm, corporation,
+            or entity. Should you reveal any such information, your employment
+            may be terminated with immediate effect and the company may pursue
+            legal remedies against you as it may deem fit.</li>
+          <li>Since you will be acquiring and getting information of Company,
+            its clients and vendor details, data, analytics and vital business
+            and strategic information including intellectual property of the
+            Company and its clients and its business plans, by making
+            endorsement below, you indemnify Company for non-disclosure of all
+            such information. Any intentional unauthorized disclosure of
+            protected, confidential details and intellectual property of the
+            Company and its clients shall amount to breach of trust. In such
+            event, suitable actions will be initiated for protecting Company’s
+            interests and intellectual property rights.</li>
+          <li>You are liable to be transferred to any other Section, Department
+            of the same establishment or may get transferred to any other
+            establishment (Existing or which may are liable to be transferred to
+            any other Section, Department of the same establishment or may get
+            transferred to any other establishment (Existing or which may be
+            setup in future) under the same management anywhere in the country
+            with or without any extra remuneration or benefits as per company
+            policy.</li>
+          <li>The member shall not undertake any activity with an organisation /
+            person which directly or indirectly competes with the business of
+            the firm during the term and for a period of 5 years after the
+            termination of your employment. Competitive activity and/or
+            competition shall mean and include, but not be limited to, being
+            associated with any business/and or activity which is competitive to
+            the business interest of the firm, either as an owner, shareholder,
+            holder of business interest, employee, consultant or advisor. You
+            shall also not join either as an owner, holder of business interest,
+            employee, consultant or advisor which are either Supplier or
+            Customer of the Company.</li>
+          <li>Your refusal to join duty at the transferred place will be deemed
+            as break in service and this will call for initiating appropriate
+            disciplinary actions. You will not be entitled to any claim of
+            salary or wages or allowances or benefits due to your absence.</li>
+          <li>On your acceptance of your resignation or termination, as the case
+            may be, from company’s services, your full and final accounts will
+            be settled on your furnishing a certificate from the HR Department
+            of the company that you do not owe any amount to the Company or any
+            undertaking given by the company at your request and you have handed
+            over the status of all Property, data, passwords, documents, Plans,
+            tools, accounts, ledgers, assets etc. in your custody including
+            utility kit, samples, stationary, Demos and equipment entrusted to
+            you by the Company.
+          </li>
+          <li>Your continuance in service of the company is subject to your
+            remaining physically and mentally fit. As and when required by the
+            management, you will submit yourself to medical examination at the
+            cost of the Company by a physician appointed by the Company for the
+            purpose. In the event of your being declared mentally, medically or
+            physically unfit to attend to the work or discharge the duties as
+            required by the Company, your services shall be terminated
+            immediately.</li>
+          <li>During the period of Probation, your services may be terminated by
+            the management at its sole discretion on immediate basis. Post
+            confirmation, your Services may be terminated by the management by
+            giving an advance One months’ notice.</li>
+          <li>In case you wish to resign from the Company, you shall be liable
+            to give an advance Two months’ notice to the Company or Two months’
+            salary in lieu of notice of any less days. In the event of the
+            resignation submitted before 7th Day in any month, that particular
+            month will be considered in the 2 months’ notice period. However if
+            the resignation is submitted after the 7th Day in any month, you
+            will have to serve the existing month and next 2 months.</li>
+          <li>Any unintimated leave / non-reporting to duty for 3 days or more
+            shall be treated as termination of services from your side, unless
+            Company on sufficient cause being shown considers your application
+            for non-termination in writing, which shall be considered as
+            termination without intimation and liable for 2 months’ Salary in
+            lieu of notice of 2 months as mentioned in the above-mentioned
+            Clause.</li>
+          <li>Your services are also liable to be terminated immediately without
+            any advance notice for suppression of information and for furnishing
+            false information with a view to obtain employment.</li>
+          <li>Your services are liable to be terminated without notice if you
+            are found indulging in any kind of propaganda, political activity,
+            misbehaviours, intimidation, violence, wilfully damaging any
+            property belonging to company, its clients or other employees and
+            not observing company laid down discipline within the premises.
+          </li>
+          <li>You shall submit a report of monthly performance (as per format
+            provided by the management) mentioning the details of your
+            performance and work done during the month to your assigned
+            reporting Manager. Your salary shall not be processed until and
+            unless monthly performance report is received by the Company on or
+            before 1st of each succeeding Month to which the performance
+            relates. Increment shall be done annually in the month of March
+            every year which will be based on the individual performance and
+            skills. The employee needs to complete at least 12 months of
+            employment for increment.
+          </li>
+          <li>After your increment you have to stay for minimum 3 months
+            (excluding notice period) in the Company.</li>
+          <li>You shall not be allowed to accept any directorship on the board
+            or employment of any other company. Even for accepting directorships
+            on the board of any other company, prior written approval from
+            Management of the Company shall be required. Further a prior written
+            approval shall also be required from the Company in case you wish to
+            carry on a business, part time employment or providing consulting
+            services of any nature. Violation of these conditions shall make you
+            liable for necessary disciplinary action including but not limited
+            to termination with immediate effect without any notice period and
+            pay thereof.</li>
+          <li>On resignation, employee is requested to share their love and
+            affection towards the Company in few words and experience on the
+            online platform in order to spread positive environment among the
+            existing as well as new employees / clients.</li>
+          <li>The company will correspond with you on the address given in title
+            above. In case there will be any change in your address, you will
+            intimate the Company in writing within 3 days from the date of such
+            change. Any letter sent by the Company by Registered AD/Speed
+            Post/Courier at the above address will be deemed as proper service.</li>
+          <li>You will be bound by all rules and regulations enforced by the
+            management from time to time in relation to conduct, discipline,
+            medical leave and holidays or on any matters relating to service
+            conditions which will be deemed as rules, regulations and order in
+            part of these terms of employment.</li>
+          <li>In the event of you be found under the influence of Alcohol, Drugs
+            or in possession of such materials while on duty, your services
+            shall get terminated immediately with initialization of other
+            disciplinary & legal actions.
+          </li>
+          <li>Disputes, if any, arising out of this Appointment letter shall be
+            subject to the exclusive jurisdiction of the Competent Court in
+            Mumbai, to the exclusion of all other concurrent courts.
+          </li>
+        </ol>
       </p>
 
-      <p>Please confirm the above terms having been correctly reproduced and being agreed upon by making your endorsement below.</p>
+      <p>Please confirm the above terms having been correctly reproduced and
+        being agreed upon by making your endorsement below.</p>
 
-      <p style="margin-bottom: -5px;"><strong>For Metaphi</strong></p>
-      <img style="height: 80px;" src="sign.png" alt="sign">
-      <p class="line"></p>
+      <p style='margin-bottom: -5px;'><strong>For Metaphi</strong></p>
+      <img style='height: 80px;' src={{sign}} alt='sign' />
+      <p class='line'></p>
 
       <p><strong>Authorized Signatory</strong></p>
+      <div style='height: 2px; background-color: black; width: 60px'></div>
 
-      <h4 style="text-decoration: underline;">ACCEPTANCE</h4>
+      <h4
+        style='text-decoration: underline; color: black; margin-left: 0'
+      >ACCEPTANCE</h4>
 
-      <p style="font-weight: 200;">I confirm that the above terms and conditions are correct reproduction of what I have discussed and agreed upon with the management.</p>
+      <p style='font-weight: 200;'>I confirm that the above terms and conditions
+        are correct reproduction of what I have discussed and agreed upon with
+        the management.</p>
 
-      <div style="font-weight: 500; display: flex; align-items: center;">
-    <strong>Signature:&nbsp;</strong>
-    <div style="height: 2px; background-color: black; width: 100px; margin-top: 13px;"></div>
-    </div>
+      <div style='font-weight: 400; display: flex; align-items: center;'>
+        <strong>Signature:&nbsp;</strong>
+        <div
+          style='height: 2px; background-color: black; width: 100px; margin-top: 13px;'
+        ></div>
+      </div>
 
-    <div style="font-weight: 500; display: flex; align-items: center; margin-top: 15px;">
-    <strong>Name:&nbsp;</strong>
-    <div style="margin-left: 31px; height: 2px; background-color: black; width: 100px; margin-top: 13px;"></div>
-    </div>
+      <div
+        style='font-weight: 500; display: flex; align-items: center; margin-top: 15px;'
+      >
+        <strong>Name:&nbsp;</strong>
+        <div
+          style='margin-left: 29px; height: 2px; background-color: black; width: 100px; margin-top: 13px;'
+        ></div>
+      </div>
 
-    <div style="margin-top: 15px; font-weight: 500; display: flex; align-items: center;">
-    <strong>Date:&nbsp;</strong>
-    <div style="margin-left: 39px; height: 2px; background-color: black; width: 100px; margin-top: 13px;"></div>
-    </div>
+      <div
+        style='margin-top: 15px; font-weight: 500; display: flex; align-items: center;'
+      >
+        <strong>Date:&nbsp;</strong>
+        <div
+          style='margin-left: 37px; height: 2px; background-color: black; width: 100px; margin-top: 13px;'
+        ></div>
+      </div>
 
-      <h2 style="margin-top: 30px; color: #2c3e50">CTC Details</h2>
-      <table>
-        <tr>
-          <th>Field</th>
-          <th>Value</th>
-        </tr>
-        <tr>
-          <td>Expected CTC</td>
-          <td>{{expected_ctc}}</td>
-        </tr>
-        <tr>
-          <td>Current CTC</td>
-          <td>{{current_ctc}}</td>
-        </tr>
-        <tr>
-          <td>Calculation<br />(Expected CTC / 100) * 2 - Current CTC</td>
-          <td>{{calculated_value}}</td>
-        </tr>
+      <div style='height: 500px;'></div>
+
+      <div style='text-align: center ;'>
+        <h5><strong>Annexure - A</strong></h5>
+        <p style='text-decoration: underline;'>CTC BREAKUP</p>
+      </div>
+
+      <div>
+        <p><strong>Your offered CTC break-up shall be as follows:</strong></p>
+        <p><strong>Name: </strong>{{full_name}}</p>
+        <p><strong>Date of Joining: </strong>{{date_of_joining}}</p>
+        <p><strong>Designation: </strong>{{stack}}</p>
+      </div>
+
+      <h2 style='margin-top: 30px; color: #2c3e50'>CTC Details</h2>
+      <table border='1'>
+        <thead>
+          <tr>
+            <th>{{full_name}}</th>
+            <th>Per Month</th>
+            <th>Per Annum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style='background-color: rgb(255, 192, 103);'>
+            <td>Basic Salary</td>
+            <td>{{basic_salary_month}}</td>
+            <td>{{basic_salary}}</td>
+          </tr>
+          <tr>
+            <td>HRA</td>
+            <td>{{hra_month}}</td>
+            <td>{{hra}}</td>
+          </tr>
+          <tr style='background-color: rgb(255, 192, 103);'>
+            <td>Education Allowance</td>
+            <td>{{education_allowance_month}}</td>
+            <td>{{education_allowance}}</td>
+          </tr>
+          <tr>
+            <td>Medical Allowance</td>
+            <td>{{medical_allowance_month}}</td>
+            <td>{{medical_allowance}}</td>
+          </tr>
+          <tr style='background-color: rgb(255, 192, 103);'>
+            <td>Travelling Allowance</td>
+            <td>{{travelling_allowance_month}}</td>
+            <td>{{travelling_allowance}}</td>
+          </tr>
+          <tr>
+            <td>Other Allowance</td>
+            <td>{{other_allowance_month}}</td>
+            <td>{{other_allowance}}</td>
+          </tr>
+          <tr style='background-color: rgb(255, 192, 103);'>
+            <td>Gross Salary</td>
+            <td>{{gross_salary_month}}</td>
+            <td>{{offered_ctc}}</td>
+          </tr>
+          <tr>
+            <td style='text-decoration: underline;'>Deductions:</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr style='background-color: rgb(255, 192, 103);'>
+            <td>Other Deductions</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Less: Professional Tax</td>
+            <td>{{net_ctc_month}}</td>
+            <td>0</td>
+          </tr>
+          <tr style='background-color: rgb(255, 192, 103);'>
+            <td>NET CTC</td>
+            <td>{{professional_tax}}</td>
+            <td>{{offered_ctc}}</td>
+          </tr>
+        </tbody>
       </table>
 
-      <p>We look forward to having you on board!</p>
-      <p>Regards,<br />HR Team</p>
-
-      <div class="footer">
-        &copy; {{year}} Company Name. All rights reserved.
+      <div>
+        <p><strong>Note:</strong></p>
+        <ol>
+          <li>EPF Contributions (Employer) is subject to changes declared by
+            Appropriate Authority.</li>
+          <li>Bonus amount is only indicative. Actual bonus shall be paid
+            anytime between the months of August-December calculated as per The
+            Payment of Bonus Act.</li>
+          <li>The above CTC will be subject to changes in the Labour Law Policy
+            by Concerned Authority.</li>
+        </ol>
       </div>
+
+      <div>
+        <p style='margin-bottom: -5px;'><strong>For Metaphi</strong></p>
+        <img style='height: 80px;' src={{sign}} alt='sign' />
+        <p class='line'></p>
+        <p><strong>Authorized Signatory</strong></p>
+      </div>
+
+      <div>
+        <p><strong>Annexure - B</strong></p>
+        <p style='text-decoration: underline;'><strong>CODE OF BUSINESS CONDUCT
+            & ETHICS FOR MEMBERS</strong></p>
+        <ol type='I'>
+          <li>
+            <strong>INTRODUCTION</strong>
+            <p>
+              K DIGITALCURRY “Company” has adopted this Code of Conduct to
+              conduct the business of the Company in accordance with the
+              applicable laws, rules, and regulations and with the highest
+              standard of ethics and values. The matters covered in this Code
+              are of utmost importance to the Company, shareholders and other
+              stakeholders.
+            </p>
+          </li>
+          <li>
+            <strong>APPLICABILITY</strong>
+            <p>
+              This Code of Business Conduct & Ethics (“Code”) is applicable to
+              all the Members of the Company. This Code will be applicable to
+              the Member effective from the date of its joining the Company.
+              Each Member undertakes to abide by this Code and shall submit a
+              declaration that he/she shall not violate this Code framed by the
+              Company. Member shall include but not limited to Employee, Senior
+              Management, All Departmental/Functional Head of different
+              functions of the Company (by whatever designation they are
+              called), Stakeholder of the Company.
+            </p>
+          </li>
+          <li>
+            <strong>HONESTY & INTEGRITY</strong>
+            <p>
+              All Member/s are expected to act in accordance with highest
+              standards of personal and professional integrity, honesty and
+              ethical conduct, while conducting Company’s business.
+            </p>
+          </li>
+          <li>
+            <strong>CONFLICT OF INTEREST</strong>
+            <p>
+              All the members are expected to adhere to lawful and ethical
+              business practices at all times. Any situation that involves, or
+              may reasonably be expected to involve, a conflict of interest with
+              the Company, should be disclosed promptly to the CEO and/or Senior
+              Management of the Company.
+            </p>
+            <div>
+              <p>A conflict of interest can occur when: </p>
+              <ul>
+                <li>Personal interest of Member is adverse to or may appear to
+                  be adverse to the interest of the Company.</li>
+                <li>Member of the Company receives improper personal benefits as
+                  a result of his/her designation in the Company. And if such
+                  member is found guilty of making any undue gain, he shall be
+                  liable to pay an amount equal to that gain to the Company.
+                  Some of the common conflicts, which are prohibited, are as
+                  follows:
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p><strong>Bribery:</strong></p>
+              <p>Use of Company’s funds or property for illegal, unethical or
+                otherwise improper purposes, including bribes, kickbacks and
+                payoffs are prohibited. Bribery is the giving of money or
+                anything else of value in an attempt to influence unlawfully the
+                action of a public interest.
+              </p>
+              <p style='margin-bottom: 0;'>No employee should pay, offer or
+                authorize any bribe or make any other unlawful payment on behalf
+                of the Company. This prohibition extends to payments to
+                consultants, agents or other third parties when you have reason
+                to believe that some part of the payment or “fee” will be used
+                for a bribe or to otherwise improperly influence government
+                action.
+              </p>
+              <p>Use of Company’s funds or property for illegal, unethical or
+                otherwise improper purposes, including bribes, kickbacks and
+                payoffs are prohibited. Bribery is the giving of money or
+                anything else of value in an attempt to influence unlawfully the
+                action of a public interest.
+              </p>
+              <p>No employee should pay, offer or authorize any bribe or make
+                any other unlawful payment on behalf of the Company. This
+                prohibition extends to payments to consultants, agents or other
+                third parties when you have reason to believe that some part of
+                the payment or “fee” will be used for a bribe or to otherwise
+                improperly influence government action.
+              </p>
+            </div>
+
+            <div>
+              <p><strong>Gift:</strong></p>
+              <p>Members may not offer, give or receive gifts from/to persons or
+                entities dealing with the Company in those cases where any such
+                gift is being made in order to influence the actions or where
+                acceptance of the gift could create the appearance of a conflict
+                of interest. Any member may provide gifts, promotional items,
+                etc. at Company’s expenses but in the normal course of business.
+              </p>
+            </div>
+
+            <div>
+              <p><strong>Business Interests: </strong></p>
+              <p>Members and their relatives shall not invest in the business of
+                any competitor of the Company. Before making any substantial
+                investment in the business of the competitor, the Member shall
+                take permission from the Management of the Company.
+              </p>
+            </div>
+          </li>
+
+          <li>Compliance with Laws, Rules and Regulations </li>
+          <p>Members are required to comply with all applicable governmental
+            laws, rules and regulations. Members must acquire appropriate
+            knowledge of the legal requirements relating to their duties
+            sufficient to enable them to recognize potential dangers. In order
+            to assist the Company in promoting lawful and ethical behaviour,
+            Member must report any possible violation of law, rules, regulation
+            of this Code to the Management of the Company.
+          </p>
+
+          <li><strong>Confidential Information</strong> </li>
+          <p>Members must maintain the confidentiality of information entrusted
+            to them by the Company and any other confidential information about
+            the Company that comes to them, from whatever source, in their
+            capacity as Member of Company, except when the disclosure is
+            authorised or legally mandated.
+          </p>
+
+          <li><strong>Protection of Assets and Information</strong> </li>
+          <p>The Members entrusted with property belonging to the Company are
+            responsible for the careful use, protection, expenditure and
+            administration of such assets. They must also pay attention to
+            Information Technology as well as Intellectual Property aspects.
+          </p>
+
+          <li><strong>Duties of Members</strong> </li>
+          <ul>
+            <li>A member of the Company will at all times conduct yourself
+              honestly, faithfully, of your duties towards the Company (its
+              offices and its members), all other persons connected with it and
+              other employees etc.
+            </li>
+
+            <li>A member will devote its full time, attention and energies to
+              the duties assigned to them by the management and during their
+              employment they will not indulge in any act prejudicial to the
+              business or goodwill of the Company.</li>
+
+            <li>A member of the Company shall exercise his duties with due and
+              reasonable care, skill and diligence and shall exercise
+              independent judgement.</li>
+
+            <li>All members should respect their colleagues. We won’t allow any
+              kind of discriminatory behaviour, harassment or victimization.</li>
+
+            <li>A member of a Company shall not involve in a situation in which
+              he may have a direct or indirect interest that conflicts with the
+              interest of the Company.
+            </li>
+
+            <li>A member shall not assign his office and any assignment so made
+              shall be void.
+            </li>
+
+            <li>Cell phone for personal use is strictly prohibited in office
+              (Excluding lunch break). In case of emergency you can access it
+              outside the office premises.</li>
+          </ul>
+
+          <li><strong>Violation of the Code</strong> </li>
+          <p>Violation of this Code of Conduct by Members will be viewed
+            seriously and may result in disciplinary action including possible
+            dismissal.
+          </p>
+          <p>Our Company may have to take disciplinary action against members
+            who repeatedly or intentionally fail to follow our Code of Conduct.
+            Disciplinary actions will vary depending on the violation.</p>
+          <p>Possible consequences include:</p>
+          <ul>
+            <li>Demotion</li>
+            <li>Reprimand</li>
+            <li>Suspension or termination for more serious offenses</li>
+            <li>Detraction of benefits for a definite or indefinite time</li>
+          </ul>
+          <p>We may take legal action in cases of corruption, theft,
+            embezzlement or other unlawful behaviour.</p>
+
+          <li><strong>Continual Updation of the Code</strong> </li>
+          <p>This Code is subject to continuous review and updation in line with
+            any changes in law, changes in Company’s philosophy, vision,
+            mission, values, business plans or otherwise as may be deemed
+            necessary by the Management of the Company.
+          </p>
+
+          <li><strong>Clarification</strong> </li>
+          <p>Any Member/s requiring any clarification may take up the issue with
+            Management of the Company.</p>
+        </ol>
+      </div>
+
+      <div style='font-weight: 400; display: flex; align-items: center;'>
+        <strong>Signature:&nbsp;</strong>
+        <img src={{sign}} alt="">
+        <div
+          style='height: 1px; background-color: black; width: 150px; margin-top: 63px; margin-left: -130px'
+        ></div>
+      </div>
+
+      <div style='font-weight: 400; display: flex; align-items: center;'>
+        <strong>Name:&nbsp;</strong>
+        <p style="margin-top: 15px;">Mr. Avnish M Mehta</p>
+      </div>
+
+      <div style='font-weight: 400; display: flex; align-items: center;'>
+        <strong>Designation:&nbsp;</strong>
+        <p style="margin-top:15px;">CEO & Founder</p>
+      </div>
+
+      <div style='font-weight: 400; display: flex; align-items: center;'>
+        <strong>Place:&nbsp;</strong>
+        <p style="margin-top: 15px;">Mumbai</p>
+      </div>
+
+      <div style='font-weight: 400; display: flex; align-items: center;'>
+        <strong>Date:&nbsp;</strong>
+        <div
+          style='height: 1px; background-color: black; width: 100px; margin-top: 13px;'
+        ></div>
+      </div>
+
     </div>
   </body>
 </html>

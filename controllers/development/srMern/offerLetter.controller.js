@@ -5,6 +5,7 @@ import puppeteer from 'puppeteer';
 import nodemailer from 'nodemailer';
 import moment from 'moment';
 import applicationModel from '../../../database/schema/masters/CandidateApplication.schema.js';
+import employeesModel from '../../../database/schema/masters/Employees.schema.js';
 
 export const generateAndSendPDF = async (req, res) => {
   try {
@@ -33,7 +34,6 @@ export const generateAndSendPDF = async (req, res) => {
 
     const { templateFileName, emailSubject, statusFieldToUpdate } = actionConfig;
 
-    // Load the HBS template
     const templatePath = path.join(process.cwd(), 'views', templateFileName);
     if (!fs.existsSync(templatePath)) {
       return res.status(500).json({
@@ -44,25 +44,27 @@ export const generateAndSendPDF = async (req, res) => {
 
     const templateHtml = fs.readFileSync(templatePath, 'utf-8');
 
-    // Convert Logo to base64
     const logoPath = path.join(process.cwd(), 'public', 'upload', 'images', 'Logo.png');
     let logoBase64 = '';
     if (fs.existsSync(logoPath)) {
       const logoBuffer = fs.readFileSync(logoPath);
-      const logoMime = 'image/png';
-      logoBase64 = `data:${logoMime};base64,${logoBuffer.toString('base64')}`;
+      logoBase64 = `data:image/png;base64,${logoBuffer.toString('base64')}`;
     }
 
-    // Convert Watermark to base64
-    const watermarkPath = path.join(process.cwd(), 'public', 'upload', 'images', 'phi-logo.png');
+    const watermarkPath = path.join(process.cwd(), 'public', 'upload', 'images', 'offer-letter-background.png');
     let watermarkBase64 = '';
     if (fs.existsSync(watermarkPath)) {
       const watermarkBuffer = fs.readFileSync(watermarkPath);
-      const watermarkMime = 'image/png';
-      watermarkBase64 = `data:${watermarkMime};base64,${watermarkBuffer.toString('base64')}`;
+      watermarkBase64 = `data:image/png;base64,${watermarkBuffer.toString('base64')}`;
     }
 
-    // Fetch application data
+    const signPath = path.join(process.cwd(), 'public', 'upload', 'images', 'sign.png');
+    let signBase64 = '';
+    if (fs.existsSync(signPath)) {
+      const signBuffer = fs.readFileSync(signPath);
+      signBase64 = `data:image/png;base64,${signBuffer.toString('base64')}`;
+    }
+
     const application = await applicationModel.findById(_id);
     if (!application) {
       return res.status(404).json({
@@ -92,11 +94,54 @@ export const generateAndSendPDF = async (req, res) => {
 
     const expected_ctc = application.expected_ctc || 0;
     const current_ctc = application.current_ctc || 0;
-    const calculatedValue = ((expected_ctc / 100) * 2) - current_ctc;
+    const offered_ctc = application.offered_ctc || 0;
+
+    // ✅ Calculations
+    const basic_salary = +(offered_ctc * 0.4).toFixed(2);
+    const hra = +(offered_ctc * 0.2).toFixed(2);
+    const education_allowance = +(offered_ctc * 0.03).toFixed(2);
+    const medical_allowance = +(offered_ctc * 0.03).toFixed(2);
+    const travelling_allowance = +(offered_ctc * 0.04).toFixed(2);
+    const other_allowance = +(offered_ctc * 0.3).toFixed(2);
+
+    const basic_salary_month = +(basic_salary / 12).toFixed(2);
+    const hra_month = +(hra / 12).toFixed(2);
+    const education_allowance_month = +(education_allowance / 12).toFixed(2);
+    const medical_allowance_month = +(medical_allowance / 12).toFixed(2);
+    const travelling_allowance_month = +(travelling_allowance / 12).toFixed(2);
+    const other_allowance_month = +(other_allowance / 12).toFixed(2);
+
+    const gross_salary_month = +(
+      basic_salary_month +
+      hra_month +
+      education_allowance_month +
+      medical_allowance_month +
+      travelling_allowance_month +
+      other_allowance_month
+    ).toFixed(2);
+
+    let professional_tax = 0;
+    const gender = application.gender?.toLowerCase();
+    if (gender == 'male') {
+      if (gross_salary_month < 7500) {
+        professional_tax = 0;
+      } else if (gross_salary_month >= 7501 && gross_salary_month < 10000) {
+        professional_tax = 175;
+      } else if (gross_salary_month >= 10000) {
+        professional_tax = gross_salary_month - 200;
+      }
+    } else if (gender == 'female') {
+      if (gross_salary_month > 25000) {
+        professional_tax = 200;
+      }
+    }
+
+    const net_ctc_month = gross_salary_month - professional_tax;
+    const calculatedValue = +(net_ctc_month * 12).toFixed(2);
 
     const stackMap = {
-      sr_mern: "Sr MERN Developer",
-      jr_mern: "Jr MERN Developer",
+      sr_mern: 'Sr MERN Developer',
+      jr_mern: 'Jr MERN Developer',
     };
 
     const displayStack = stackMap[stack] || stack;
@@ -104,10 +149,14 @@ export const generateAndSendPDF = async (req, res) => {
       ? moment(date_of_joining).format('DD/MM/YYYY')
       : 'N/A';
 
-    // Compile Handlebars template
+    // ✅ Gender-based title
+    const title = gender === 'male' ? 'Mister' : gender === 'female' ? 'Miss' : '';
+
+    // ✅ Handlebars template data
     const template = hbs.compile(templateHtml);
     const finalHtml = template({
       full_name,
+      title,
       stack: displayStack,
       date_of_joining: formattedDateOfJoining,
       expected_ctc,
@@ -115,10 +164,28 @@ export const generateAndSendPDF = async (req, res) => {
       calculated_value: calculatedValue,
       logo: logoBase64,
       watermark: watermarkBase64,
-      location: application.location || 'N/A', // Ensure location if needed
+      sign: signBase64,
+      location: application.location || 'N/A',
+
+      basic_salary,
+      education_allowance,
+      hra,
+      medical_allowance,
+      travelling_allowance,
+      other_allowance,
+      offered_ctc,
+
+      basic_salary_month,
+      education_allowance_month,
+      hra_month,
+      medical_allowance_month,
+      travelling_allowance_month,
+      other_allowance_month,
+      gross_salary_month,
+      professional_tax,
+      net_ctc_month,
     });
 
-    // Generate PDF with margins to avoid cut-off
     const browser = await puppeteer.launch({
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -130,15 +197,14 @@ export const generateAndSendPDF = async (req, res) => {
       format: 'A4',
       printBackground: true,
       margin: {
-        top: '100px', // leave room for header
-        bottom: '50px', // leave room for footer/bottom strip
+        top: '100px',
+        bottom: '50px',
         left: '20px',
         right: '20px',
       },
     });
     await browser.close();
 
-    // Send email with PDF
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
@@ -163,14 +229,23 @@ export const generateAndSendPDF = async (req, res) => {
       ],
     });
 
-    // Update DB
+    // ✅ Save to Employee collection if stage is 'joined'
+    if (application.stage === 'joined') {
+      const newEmployee = new employeesModel({
+        ...application.toObject(), // copies all fields
+        date_of_joining: application.date_of_joining || date_of_joining,
+        createdAt: new Date(),
+      });
+      await newEmployee.save();
+    }
+
     await applicationModel.findByIdAndUpdate(_id, {
       [statusFieldToUpdate]: true,
     });
 
     res.status(200).json({
       status: 'success',
-      message: `${emailSubject} PDF generated, emailed, and status updated successfully.`,
+      message: `${emailSubject} PDF generated, emailed, status updated, and employee record created if applicable.`,
     });
   } catch (error) {
     console.error('ERROR stack:', error.stack);
