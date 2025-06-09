@@ -1,3 +1,4 @@
+// ... all import statements remain unchanged
 import path from 'path';
 import fs from 'fs';
 import hbs from 'handlebars';
@@ -5,7 +6,7 @@ import puppeteer from 'puppeteer';
 import nodemailer from 'nodemailer';
 import moment from 'moment';
 import applicationModel from '../../../database/schema/masters/CandidateApplication.schema.js';
-import employeesModel from '../../../database/schema/masters/Employees.schema.js';
+// Removed: import employeesModel from '../../../database/schema/masters/Employees.schema.js';
 
 export const generateAndSendPDFSrMern = async (req, res) => {
   try {
@@ -44,7 +45,6 @@ export const generateAndSendPDFSrMern = async (req, res) => {
 
     const templateHtml = fs.readFileSync(templatePath, 'utf-8');
 
-    //declaring path and converting the images to base64 so that it can be used in .hbs template(only accepts in text format thats)
     const logoPath = path.join(process.cwd(), 'public', 'upload', 'images', 'Logo.png');
     let logoBase64 = '';
     if (fs.existsSync(logoPath)) {
@@ -97,7 +97,7 @@ export const generateAndSendPDFSrMern = async (req, res) => {
     const current_ctc = application.current_ctc || 0;
     const offered_ctc = application.offered_ctc || 0;
 
-    //CTC Calculations
+    // CTC Calculations
     const basic_salary = +(offered_ctc * 0.4).toFixed(2);
     const hra = +(offered_ctc * 0.2).toFixed(2);
     const education_allowance = +(offered_ctc * 0.03).toFixed(2);
@@ -105,7 +105,6 @@ export const generateAndSendPDFSrMern = async (req, res) => {
     const travelling_allowance = +(offered_ctc * 0.04).toFixed(2);
     const other_allowance = +(offered_ctc * 0.3).toFixed(2);
 
-    //monthly calculations
     const basic_salary_month = +(basic_salary / 12).toFixed(2);
     const hra_month = +(hra / 12).toFixed(2);
     const education_allowance_month = +(education_allowance / 12).toFixed(2);
@@ -130,7 +129,7 @@ export const generateAndSendPDFSrMern = async (req, res) => {
       } else if (gross_salary_month >= 7501 && gross_salary_month < 10000) {
         professional_tax = 175;
       } else if (gross_salary_month >= 10000) {
-        professional_tax = gross_salary_month - 200;
+        professional_tax = 200;
       }
     } else if (gender == 'female') {
       if (gross_salary_month > 25000) {
@@ -151,10 +150,8 @@ export const generateAndSendPDFSrMern = async (req, res) => {
       ? moment(date_of_joining).format('DD/MM/YYYY')
       : 'N/A';
 
-    //Gender-based title
     const title = gender === 'male' ? 'Mister' : gender === 'female' ? 'Miss' : '';
 
-    //Handlebars template data
     const template = hbs.compile(templateHtml);
     const finalHtml = template({
       full_name,
@@ -231,15 +228,7 @@ export const generateAndSendPDFSrMern = async (req, res) => {
       ],
     });
 
-    //Save to Employee collection if stage is 'joined'
-    if (application.stage === 'joined') {
-      const newEmployee = new employeesModel({
-        ...application.toObject(), // copies all fields
-        date_of_joining: application.date_of_joining || date_of_joining,
-        createdAt: new Date(),
-      });
-      await newEmployee.save();
-    }
+    // Removed: Employee creation logic
 
     await applicationModel.findByIdAndUpdate(_id, {
       [statusFieldToUpdate]: true,
@@ -247,7 +236,7 @@ export const generateAndSendPDFSrMern = async (req, res) => {
 
     res.status(200).json({
       status: 'success',
-      message: `${emailSubject} PDF generated, emailed, status updated, and employee record created if applicable.`,
+      message: `${emailSubject} PDF generated, emailed, and status updated.`,
     });
   } catch (error) {
     console.error('ERROR stack:', error.stack);
