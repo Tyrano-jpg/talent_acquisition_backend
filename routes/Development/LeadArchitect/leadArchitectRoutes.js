@@ -8,6 +8,7 @@ import { uploadCandidateDataLeadArchitect } from '../../../controllers/developme
 import { listing_newleadarchitect } from '../../../controllers/development/leadArchitect/leadarchitect.controller.js';
 import { edit_leadarchitect } from '../../../controllers/development/leadArchitect/edit.controller.js';
 import { downloadCSVLeadArchitect } from '../../../controllers/development/leadArchitect/generatecsv.js';
+import { generateAndSendPDFLeadArchitect } from '../../../controllers/development/leadArchitect/offerLetter.controller.js';
 const leadArchitectRouter = Router();
 
 leadArchitectRouter.post(
@@ -16,6 +17,8 @@ leadArchitectRouter.post(
   // RolesPermissions('user', 'add'),
   listing_newleadarchitect
 );
+
+leadArchitectRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFLeadArchitect)
 
 leadArchitectRouter.post('/update/:_id', AuthMiddleware, updating_leadarchitect);
 

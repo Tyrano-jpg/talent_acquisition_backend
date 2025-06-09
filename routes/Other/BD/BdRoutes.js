@@ -7,6 +7,8 @@ import { edit_bd } from '../../../controllers/other/bd/edit.controller.js';
 import { bd_bulkUpload } from '../../../controllers/other/bd/bulkupload.js';
 import { uploadCandidateDataBd } from '../../../controllers/other/bd/uploadCandidate.controller.js';
 import { downloadCSVBd } from '../../../controllers/other/bd/generatecsv.js';
+import baRouter from '../BA/BaRoutes.js';
+import { generateAndSendPDFBd } from '../../../controllers/other/bd/offerLetter.controller.js';
 
 const bdRouter = Router();
 
@@ -15,6 +17,8 @@ bdRouter.post(
   AuthMiddleware,
   listing_new_bd
 );
+
+baRouter.post('send-letter', AuthMiddleware, generateAndSendPDFBd)
 
 bdRouter.post('/update/:_id', AuthMiddleware, updating_bd);
 

@@ -8,6 +8,7 @@ import { jrsofteng_bulkUpload } from '../../../controllers/development/jrSoftEng
 import { uploadCandidateDataJrSoftEng } from '../../../controllers/development/jrSoftEng/uploadCandidate.controller.js';
 import { edit_jrsofteng } from '../../../controllers/development/jrSoftEng/edit.controller.js';
 import { downloadCSVJrSoftEng } from '../../../controllers/development/jrSoftEng/genratecsv.js';
+import { generateAndSendPDFJrSoftEng } from '../../../controllers/development/jrSoftEng/offerLetter.controller.js';
 
 const jrSoftEngRouter = Router();
 
@@ -17,6 +18,8 @@ jrSoftEngRouter.post(
   // RolesPermissions('user', 'add'),
   listing_new_jrsofteng
 );
+
+jrSoftEngRouter.post('send-letter', AuthMiddleware, generateAndSendPDFJrSoftEng)
 
 jrSoftEngRouter.post('/update/:_id', AuthMiddleware, updating_jrsofteng);
 

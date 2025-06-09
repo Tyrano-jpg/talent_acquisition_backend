@@ -7,6 +7,7 @@ import { jrflutter_bulkUpload } from '../../../controllers/development/jrFlutter
 import { listing_new_jrflutter } from '../../../controllers/development/jrFlutterDev/jrflutter.controller.js';
 import { edit_jrflutter } from '../../../controllers/development/jrFlutterDev/edit.controller.js';
 import { downloadCSVJrFlutter } from '../../../controllers/development/jrFlutterDev/generatecsv.js';
+import { generateAndSendPDFJrFlutter } from '../../../controllers/development/jrFlutterDev/offerLetter.controller.js';
 
 const jrFlutterRouter = Router();
 
@@ -16,6 +17,8 @@ jrFlutterRouter.post(
   // RolesPermissions('user', 'add'),
   listing_new_jrflutter
 );
+
+jrFlutterRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFJrFlutter)
 
 jrFlutterRouter.post('/update/:_id', AuthMiddleware, updating_jrflutter);
 

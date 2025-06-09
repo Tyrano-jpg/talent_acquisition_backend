@@ -7,6 +7,7 @@ import { srsofteng_bulkUpload } from '../../../controllers/development/srSoftEng
 import { uploadCandidateDataSrSoftEng } from '../../../controllers/development/srSoftEng/uploadCandidate.controller.js';
 import { downloadCSVJrSoftEng } from '../../../controllers/development/jrSoftEng/genratecsv.js';
 import { edit_srsofteng } from '../../../controllers/development/srSoftEng/edit.controller.js';
+import { generateAndSendPDFSrSoftEng } from '../../../controllers/development/srSoftEng/offerLetter.controller.js';
 
 const srSoftEngRouter = Router();
 
@@ -16,6 +17,8 @@ srSoftEngRouter.post(
   // RolesPermissions('user', 'add'),
   listing_new_srsofteng
 );
+
+srSoftEngRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFSrSoftEng)
 
 srSoftEngRouter.post('/update/:_id', AuthMiddleware, updating_srsofteng);
 

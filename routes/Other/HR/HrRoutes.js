@@ -7,6 +7,7 @@ import { hr_bulkUpload } from '../../../controllers/other/hr/bulkupload.controll
 import { uploadCandidateDataHr } from '../../../controllers/other/hr/uploadCandidate.controller.js';
 import { MulterFunction } from '../../../config/multer/multer.js';
 import { downloadCSVHr } from '../../../controllers/other/hr/generatecsv.js';
+import { generateAndSendPDFHr } from '../../../controllers/other/hr/offerLetter.controller.js';
 
 const hrRouter = Router();
 
@@ -16,6 +17,8 @@ hrRouter.post(
   // RolesPermissions('user', 'add'),
   listing_new_hr
 );
+
+hrRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFHr)
 
 hrRouter.post('/update/:_id', AuthMiddleware, updating_hr);
 

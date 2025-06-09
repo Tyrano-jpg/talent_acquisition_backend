@@ -8,6 +8,7 @@ import { ios_bulkUpload } from '../../../controllers/development/iosDev/bulkuplo
 import { uploadCandidateDataIOS } from '../../../controllers/development/iosDev/uploadCandidate.Controller.js';
 import { edit_ios } from '../../../controllers/development/iosDev/edit.controller.js';
 import { downloadCSVIos } from '../../../controllers/development/iosDev/generatecsv.js';
+import { generateAndSendPDFIos } from '../../../controllers/development/iosDev/offerLetter.controller.js';
 const iosRouter = Router();
 
 iosRouter.post(
@@ -16,6 +17,8 @@ iosRouter.post(
   // RolesPermissions('user', 'add'),
   listing_newios
 );
+
+iosRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFIos)
 
 iosRouter.post('/update/:_id', AuthMiddleware, updating_ios);
 

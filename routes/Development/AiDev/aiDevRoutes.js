@@ -8,14 +8,16 @@ import { aidev_bulkUpload } from '../../../controllers/development/aiDev/bulkupl
 import { uploadCandidateDataAIDev } from '../../../controllers/development/aiDev/uploadCandidate.controller.js';
 import { edit_ai } from '../../../controllers/development/aiDev/edit.controller.js';
 import { downloadCSVAi } from '../../../controllers/development/aiDev/generatecsv.js';
+import { generateAndSendPDFAi } from '../../../controllers/development/aiDev/offerLetter.controller.js';
 const aiDevRouter = Router();
 
 aiDevRouter.post(
   '/list',
   AuthMiddleware,
-  // RolesPermissions('user', 'add'),
   listing_newaidev
 );
+
+aiDevRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFAi)
 
 aiDevRouter.post('/update/:_id', AuthMiddleware, updating_aidev);
 

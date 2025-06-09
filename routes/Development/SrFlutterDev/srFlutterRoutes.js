@@ -8,6 +8,7 @@ import { uploadCandidateDataSrFLutter } from '../../../controllers/development/s
 import { listing_new_srflutter } from '../../../controllers/development/srFlutterDev/srflutter.controller.js';
 import { edit_srflutter } from '../../../controllers/development/srFlutterDev/edit.controller.js';
 import { downloadCSVSrFlutter } from '../../../controllers/development/srFlutterDev/generatecsv.js';
+import { generateAndSendPDFSrFlutter } from '../../../controllers/development/srFlutterDev/offerLetter.controller.js';
 
 const srFlutterRouter = Router();
 
@@ -16,6 +17,8 @@ srFlutterRouter.post(
   AuthMiddleware,
   listing_new_srflutter
 );
+
+srFlutterRouter.post('/offer-letter', AuthMiddleware, generateAndSendPDFSrFlutter)
 
 srFlutterRouter.post('/update/:_id', AuthMiddleware, updating_srflutter);
 

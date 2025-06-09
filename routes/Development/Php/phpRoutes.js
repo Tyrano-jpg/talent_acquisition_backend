@@ -8,6 +8,7 @@ import { php_bulkUpload } from '../../../controllers/development/php/bulkupload.
 import { uploadCandidateDataPhp } from '../../../controllers/development/php/uploadCandidate.controller.js';
 import { edit_php } from '../../../controllers/development/php/edit.controller.js';
 import { downloadCSVPhp } from '../../../controllers/development/php/generatecsv.js';
+import { generateAndSendPDFPhp } from '../../../controllers/development/php/offerLetter.controller.js';
 
 const phpRouter = Router();
 
@@ -17,6 +18,8 @@ phpRouter.post(
   // RolesPermissions('user', 'add'),
   listing_new_php
 );
+
+phpRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFPhp)
 
 phpRouter.post('/update/:_id', AuthMiddleware, updating_php);
 
