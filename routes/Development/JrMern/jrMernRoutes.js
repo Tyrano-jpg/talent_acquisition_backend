@@ -8,6 +8,7 @@ import { uploadCandidateDataJrMern } from '../../../controllers/development/jrMe
 import { listing_new_jrmern } from '../../../controllers/development/jrMern/jrmern.controller.js';
 import { edit_jrmern } from '../../../controllers/development/jrMern/edit.controller.js';
 import { downloadCSVJrMern } from '../../../controllers/development/jrMern/generatecsv.js';
+import { generateAndSendPDFJrMern } from '../../../controllers/development/jrMern/offerLetter.controller.js';
 
 const jrMernRouter = Router();
 
@@ -17,6 +18,8 @@ jrMernRouter.post(
   // RolesPermissions('user', 'add'),
   listing_new_jrmern
 );
+
+jrMernRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFJrMern )
 
 jrMernRouter.post('/update/:_id', AuthMiddleware, updating_jrmern);
 

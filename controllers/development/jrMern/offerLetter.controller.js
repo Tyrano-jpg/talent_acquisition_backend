@@ -7,7 +7,7 @@ import moment from 'moment';
 import applicationModel from '../../../database/schema/masters/CandidateApplication.schema.js';
 import employeesModel from '../../../database/schema/masters/Employees.schema.js';
 
-export const generateAndSendPDFSrMern = async (req, res) => {
+export const generateAndSendPDFJrMern = async (req, res) => {
   try {
     const { _id, full_name, email_id, stack, date_of_joining, action } = req.body;
 
