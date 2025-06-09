@@ -7,6 +7,7 @@ import { edit_devops } from '../../../controllers/deployment/devOps/edit.control
 import { downloadCSVDevOps } from '../../../controllers/deployment/devOps/generatecsv.js';
 import { updating_devops } from '../../../controllers/deployment/devOps/updatingdevops.js';
 import { uploadCandidateDataDevOps } from '../../../controllers/deployment/devOps/uploadCandidate.controller.js';
+import { generateAndSendPDFDevOps } from '../../../controllers/deployment/devOps/offerLetter.controller.js';
 
 const devOpsRouter = Router();
 
@@ -16,6 +17,8 @@ devOpsRouter.post(
   // RolesPermissions('user', 'add'),
   listing_newdevops
 );
+
+devOpsRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFDevOps)
 
 devOpsRouter.post('/update/:_id', AuthMiddleware, updating_devops);
 

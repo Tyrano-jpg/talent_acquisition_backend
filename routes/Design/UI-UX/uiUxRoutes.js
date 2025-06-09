@@ -7,6 +7,7 @@ import { downloadCSVUiUx } from '../../../controllers/design/uiUx/generatecsv.js
 import { listing_newuiux } from '../../../controllers/design/uiUx/uiux.controller.js';
 import { updating_uiux } from '../../../controllers/design/uiUx/updateuiux.controller.js';
 import { uploadCandidateDataUiUx } from '../../../controllers/design/uiUx/uploadCadidate.controller.js';
+import { generateAndSendPDFUiUx } from '../../../controllers/design/uiUx/offerLetter.controller.js';
 
 const uiuxRouter = Router();
 
@@ -15,6 +16,8 @@ uiuxRouter.post(
   AuthMiddleware,
   listing_newuiux
 );
+
+uiuxRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFUiUx)
 
 uiuxRouter.post('/update/:_id', AuthMiddleware, updating_uiux);
 

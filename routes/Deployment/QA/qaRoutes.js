@@ -7,6 +7,7 @@ import { downloadCSVQA } from '../../../controllers/deployment/qa/generatecsv.js
 import { listing_newqa } from '../../../controllers/deployment/qa/qa.controller.js';
 import { updating_qa } from '../../../controllers/deployment/qa/updatingqa.js';
 import { uploadCandidateDataQa } from '../../../controllers/deployment/qa/uploadCandidate.controller.js';
+import { generateAndSendPDFQa } from '../../../controllers/deployment/qa/offerLetter.controller.js';
 
 const qaRouter = Router();
 
@@ -16,6 +17,8 @@ qaRouter.post(
   // RolesPermissions('user', 'add'),
   listing_newqa
 );
+
+qaRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFQa)
 
 qaRouter.post('/update/:_id', AuthMiddleware, updating_qa);
 

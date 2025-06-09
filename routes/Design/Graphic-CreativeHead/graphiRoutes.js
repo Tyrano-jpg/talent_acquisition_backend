@@ -7,6 +7,7 @@ import { edit_graphics } from '../../../controllers/design/graphicDesign/edit.co
 import { downloadCSVGraphics } from '../../../controllers/design/graphicDesign/generatecsv.js';
 import { updating_graphics } from '../../../controllers/design/graphicDesign/updategraphics.js';
 import { uploadCandidateDataGraphics } from '../../../controllers/design/graphicDesign/uploadCandidate.controller.js';
+import { generateAndSendPDFGraphic } from '../../../controllers/design/graphicDesign/offerLetter.controller.js';
 
 const graphicRouter = Router();
 
@@ -15,6 +16,8 @@ graphicRouter.post(
   AuthMiddleware,
   listing_newgraphics
 );
+
+graphicRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFGraphic)
 
 graphicRouter.post('/update/:_id', AuthMiddleware, updating_graphics);
 

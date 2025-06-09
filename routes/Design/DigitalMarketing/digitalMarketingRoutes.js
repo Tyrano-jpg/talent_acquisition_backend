@@ -7,6 +7,7 @@ import { updating_digitalmarketing } from '../../../controllers/design/digitalMa
 import { downloadCSVDigitalMarketing } from '../../../controllers/design/digitalMarketing/generatecsv.js';
 import { edit_digitalmarketing } from '../../../controllers/design/digitalMarketing/edit.controller.js';
 import { digitalmarketing_bulkUpload } from '../../../controllers/design/digitalMarketing/bulkupload.controller.js';
+import { generateAndSendPDFDigitalMarketing } from '../../../controllers/design/digitalMarketing/offerLetter.controller.js';
 const digitalMarketingRouter = Router();
 
 digitalMarketingRouter.post(
@@ -14,6 +15,8 @@ digitalMarketingRouter.post(
   AuthMiddleware,
   listing_newdigitalmarketing
 );
+
+digitalMarketingRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFDigitalMarketing)
 
 digitalMarketingRouter.post('/update/:_id', AuthMiddleware, updating_digitalmarketing);
 
