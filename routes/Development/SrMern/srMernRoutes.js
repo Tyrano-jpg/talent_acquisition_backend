@@ -22,7 +22,7 @@ srMernRouter.post(
 
 srMernRouter.post('/send-letter', AuthMiddleware, generateAndSendPDFSrMern )
 
-srMernRouter.post('/update/:_id', AuthMiddleware, updating_srmern);
+srMernRouter.post('/update/:_id', AuthMiddleware, updating_srmern); 
 
 srMernRouter.post('/edit/:_id', AuthMiddleware, edit_srmern);
 
